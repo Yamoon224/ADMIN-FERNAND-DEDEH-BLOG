@@ -14,7 +14,7 @@ class ArticleRepository
             $query->where('type', $type);
         }
 
-        return $query->get();
+        return $query->orderByDesc('id')->get();
     }
 
     public function paginate(array $with = [], $type = 'ARTICLE', int $page = 10)
@@ -25,7 +25,7 @@ class ArticleRepository
             $query->where('type', $type);
         }
 
-        return $query->paginate($page);
+        return $query->orderByDesc('id')->paginate($page);
     }
 
 
