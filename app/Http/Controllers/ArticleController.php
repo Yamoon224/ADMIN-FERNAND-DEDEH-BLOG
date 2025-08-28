@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Repositories\ArticleRepository;
 use App\Http\Resources\ArticleResource;
 use App\Repositories\CategoryRepository;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -96,7 +96,10 @@ class ArticleController extends Controller
             // Optionnel : supprimer l'ancienne image si elle existe
             $article = $this->repository->find($id);
             if ($article && $article->path_resource) {
-                Storage::disk('public')->delete($article->path_resource);
+                $filePath = public_path($article->path_resource);
+                if (File::exists($filePath)) {
+                    File::delete($filePath);
+                }
             }
         }
 

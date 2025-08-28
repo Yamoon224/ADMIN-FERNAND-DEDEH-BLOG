@@ -88,10 +88,10 @@
                             <div class="mb-4">
                                 <label class="form-label" for="content">@lang('locale.content') <span class="text-danger">*</span></label>
                                 <!-- CKEditor visible -->
-                                <textarea id="editor" placeholder="@lang('locale.content')">{{ $article->content }}</textarea>
+                                <textarea id="editor" placeholder="@lang('locale.content')">{!! $article->content !!}</textarea>
 
                                 <!-- textarea masqué qui sera soumis -->
-                                <textarea name="content" id="content-hidden" required maxlength="10000" hidden></textarea>
+                                <textarea name="content" id="content-hidden" required maxlength="10000" hidden>{!! $article->content !!}</textarea>
                             </div>
                         </div>
                         
