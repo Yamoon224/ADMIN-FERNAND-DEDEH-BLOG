@@ -48,4 +48,6 @@
         'user_profile' => 'Profil Utilisateur',
         'profile' => "Profil",
         'confirm_delete' => 'Confirmez-vous cette suppression ?',
+        'details' => 'Détails',
+        'article_details' => "Détails d'un Article",
     ];

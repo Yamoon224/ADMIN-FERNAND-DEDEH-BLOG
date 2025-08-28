@@ -66,7 +66,7 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = $this->repository->find($id);
-        return new ArticleResource($article);
+        return view('articles.show', compact('article'));
     }
 
     public function edit(int $id)

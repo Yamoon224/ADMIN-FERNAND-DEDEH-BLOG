@@ -48,4 +48,6 @@
         'user_profile' => 'User Profile',
         'podcast_url' => "Podcast URL",
         'confirm_delete' => 'Do You Confirm this Action ?',
+        'details' => 'Details',
+        'article_details' => 'Article Details',
     ];
