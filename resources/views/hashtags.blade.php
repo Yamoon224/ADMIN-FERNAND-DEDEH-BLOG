@@ -14,7 +14,7 @@
                 <nav class="flex-shrink-0 mt-1 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="javascript:void(0)">@lang('locale.hashtag_management')</a>
+                            <a class="link-fx" href="javascript:void(0)">@lang('locale.article_management')</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">@lang('locale.hashtag', ['suffix' => app()->getLocale() == 'en' ? 's' : ''])</li>
                     </ol>
