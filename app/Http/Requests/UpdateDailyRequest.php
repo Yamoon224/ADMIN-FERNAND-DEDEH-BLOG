@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCommentRequest extends FormRequest
+class UpdateDailyRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,8 +14,8 @@ class UpdateCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comments'   => ['nullable', 'string'],
-            'question_id' => ['sometimes', 'integer', 'exists:questions,id'],
+            'published_at' => ['sometimes', 'date'],
+            'created_by'   => ['sometimes', 'integer', 'exists:users,id'],
         ];
     }
 }

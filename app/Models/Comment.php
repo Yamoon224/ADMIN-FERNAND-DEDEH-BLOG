@@ -15,13 +15,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property int $id
  * @property string|null $comments
- * @property int $article_id
+ * @property int $daily_question_id
  * @property Carbon $created_at
  * @property int|null $created_by
  * @property Carbon $updated_at
  * @property string|null $deleted_at
  * 
- * @property Article $article
+ * @property Question $question
  *
  * @package App\Models
  */
@@ -30,14 +30,14 @@ class Comment extends Model
 	use SoftDeletes;
 
 	protected $casts = [
-		'article_id' => 'int',
+		'daily_question_id' => 'int',
 		'created_by' => 'int'
 	];
 
 	protected $guarded = [];
 
-	public function article()
+	public function question()
 	{
-		return $this->belongsTo(Article::class);
+		return $this->belongsTo(Question::class, 'question_id');
 	}
 }

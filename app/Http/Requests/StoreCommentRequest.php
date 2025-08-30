@@ -15,7 +15,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'comments'   => ['nullable', 'string'],
-            'article_id' => ['required', 'integer', 'exists:articles,id'],
+            'question_id' => ['required', 'integer', 'exists:questions,id'],
             'created_by' => ['nullable', 'integer', 'exists:users,id'],
         ];
     }

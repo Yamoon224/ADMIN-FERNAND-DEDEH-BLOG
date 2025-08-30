@@ -4,31 +4,10 @@ namespace App\Repositories;
 
 use App\Models\Group;
 
-class GroupRepository
+class GroupRepository extends BaseRepository
 {
-    public function all(array $with = [])
+    public function __construct(Group $model)
     {
-        return Group::with($with)->get();
-    }
-
-    public function find(int $id, array $with = [])
-    {
-        return Group::with($with)->findOrFail($id);
-    }
-
-    public function create(array $data): Group
-    {
-        return Group::create($data);
-    }
-
-    public function update(Group $group, array $data): Group
-    {
-        $group->update($data);
-        return $group;
-    }
-
-    public function delete(Group $group): bool
-    {
-        return $group->delete();
+        parent::__construct($model);
     }
 }

@@ -18,6 +18,41 @@ class BannerController extends Controller
         $this->repository = $repository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/banners",
+     *     operationId="getBannersList",
+     *     tags={"Banners"},
+     *     summary="Get list of banners",
+     *     description="Returns a list of banners with their creator",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="image_path", type="string", example="/images/banner1.jpg"),
+     *                 @OA\Property(property="position", type="string", example="HOMEPAGE_TOP"),
+     *                 @OA\Property(property="link", type="string", example="https://example.com"),
+     *                 @OA\Property(property="status", type="integer", example=1),
+     *                 @OA\Property(
+     *                     property="creator",
+     *                     type="object",
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="name", type="string", example="Admin")
+     *                 ),
+     *                 @OA\Property(property="created_at", type="string", format="date-time"),
+     *                 @OA\Property(property="updated_at", type="string", format="date-time"),
+     *                 @OA\Property(property="deleted_at", type="string", format="date-time", nullable=true)
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=401, description="Unauthenticated"),
+     *     @OA\Response(response=403, description="Forbidden")
+     * )
+     */
     public function index()
     {
         return BannerResource::collection($this->repository->all());

@@ -12,32 +12,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Article
+ * Class Question
  * 
  * @property int $id
- * @property string $type
- * @property string $title
- * @property string|null $content
- * @property string $path_resource
- * @property int|null $category_id
- * @property string $status
+ * @property string|null $title
+ * @property string $body
  * @property Carbon $created_at
  * @property int $created_by
  * @property Carbon $updated_at
  * @property string|null $deleted_at
  * 
  * @property User $user
- * @property Category|null $category
  * @property Collection|Comment[] $comments
  *
  * @package App\Models
  */
-class Article extends Model
+class Question extends Model
 {
 	use SoftDeletes;
 
 	protected $casts = [
-		'category_id' => 'int',
 		'created_by' => 'int'
 	];
 
@@ -48,8 +42,8 @@ class Article extends Model
 		return $this->belongsTo(User::class, 'created_by');
 	}
 
-	public function category()
+	public function comments()
 	{
-		return $this->belongsTo(Category::class);
+		return $this->hasMany(Comment::class, 'question_id');
 	}
 }

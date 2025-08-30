@@ -9,27 +9,25 @@
         <div class="content">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
                 <div class="flex-grow-1">
-                    <h1 class="h3 fw-bold mb-1">@lang('locale.category', ['suffix' => app()->getLocale() == 'en' ? 'ies' : 's'])</h1>
+                    <h1 class="h3 fw-bold mb-1">@lang('locale.hashtag', ['suffix' => app()->getLocale() == 'en' ? 's' : ''])</h1>
                 </div>
                 <nav class="flex-shrink-0 mt-1 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="javascript:void(0)">@lang('locale.article_management')</a>
+                            <a class="link-fx" href="javascript:void(0)">@lang('locale.hashtag_management')</a>
                         </li>
-                        <li class="breadcrumb-item" aria-current="page">@lang('locale.category', ['suffix' => app()->getLocale() == 'en' ? 'ies' : 's'])</li>
+                        <li class="breadcrumb-item" aria-current="page">@lang('locale.hashtag', ['suffix' => app()->getLocale() == 'en' ? 's' : ''])</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
+
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default d-flex align-items-center justify-content-between">
-                <h3 class="block-title">
-                    @lang('locale.category', ['suffix' => app()->getLocale() == 'en' ? 'ies' : 's'])
-                </h3>
-                <a role="button" data-bs-toggle="modal" data-bs-target="#add-category"
-                   class="btn btn-sm btn-success">
+                <h3 class="block-title">@lang('locale.hashtag', ['suffix'=>'s'])</h3>
+                <a role="button" data-bs-toggle="modal" data-bs-target="#add-hashtag" class="btn btn-sm btn-success">
                     <i class="si si-plus me-1"></i> @lang('locale.add', ['param' => ''])
                 </a>
             </div>
@@ -37,40 +35,34 @@
                 <table class="table table-sm table-bordered table-striped table-vcenter js-dataTable-buttons">
                     <thead>
                         <th class="text-center">#</th>
-                        <th class="d-none d-sm-table-cell">@lang('locale.categoryname')</th>
-                        <th class="d-none d-sm-table-cell">@lang('locale.description')</th>
+                        <th class="d-none d-sm-table-cell">@lang('locale.hashtag', ['suffix'=>''])</th>
                         <th class="d-none d-sm-table-cell">@lang('locale.actions')</th>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $item)
+                        @foreach ($hashtags as $item)
                             <tr>
                                 <td class="text-center fs-sm">{{ $loop->iteration }}</td>
-                                <td class="fw-semibold fs-sm">{{ $item->name }}</td>
-                                <td class="d-none d-sm-table-cell fs-sm">{{ $item->description ?? '---' }}</td>
+                                <td class="fw-semibold fs-sm">{{ $item->hashtag }}</td>
                                 <td class="d-none d-sm-table-cell fs-sm">
                                     <div class="d-flex gap-2">
-                                        <a 
-                                            role="button"
-                                            class="btn btn-sm btn-primary"
-                                            data-id="{{ $item->id }}"
-                                            data-name="{{ $item->name }}"
-                                            data-description="{{ $item->description }}"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#edit-category"
-                                            onclick="openEditCategoryModal(this)"
-                                        >
+                                        <a role="button"
+                                           class="btn btn-sm btn-primary"
+                                           data-id="{{ $item->id }}"
+                                           data-hashtag="{{ $item->hashtag }}"
+                                           data-bs-toggle="modal" 
+                                           data-bs-target="#edit-hashtag"
+                                           onclick="openEditHashtagModal(this)">
                                             <i class="si si-note me-1"></i>
                                         </a>
 
-                                        <form action="{{ route('categories.destroy', $item->id) }}" method="post"
-                                            onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                        <form action="{{ route('hashtags.destroy', $item->id) }}" method="post"
+                                              onsubmit="return confirm('@lang('locale.confirm_delete')')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger">
                                                 <i class="si si-trash me-1"></i>
                                             </button>
                                         </form>
-                                      
                                     </div>
                                 </td>
                             </tr>
@@ -81,33 +73,26 @@
         </div>
     </div>
 
-    <div class="modal fade" id="add-category" tabindex="-1" role="dialog" aria-labelledby="add-category" aria-hidden="true">
+    {{-- Add Modal --}}
+    <div class="modal fade" id="add-hashtag" tabindex="-1" role="dialog" aria-labelledby="add-hashtag" aria-hidden="true">
         <div class="modal-dialog modal-dialog-popout" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header block-header-default bg-success text-white">
-                        <h3 class="block-title">@lang('locale.category', ['suffix' => app()->getLocale() == 'en' ? 'y' : ''])</h3>
+                        <h3 class="block-title">@lang('locale.hashtag', ['suffix'=>''])</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option text-danger" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-fw fa-times"></i>
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('hashtags.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="created_by" value="{{ auth()->id() }}">
                         <div class="block-content fs-sm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="mb-4">
-                                        <label class="form-label" for="name">@lang('locale.categoryname') <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-control-alt" id="name" name="name" placeholder="@lang('locale.categoryname')" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label" for="phone">@lang('locale.description')</label>
-                                        <textarea name="description" id="" cols="30" rows="5" class="form-control form-control-alt" placeholder="@lang('locale.description')"></textarea>
-                                    </div>
-                                </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="hashtag">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-alt" id="hashtag" name="hashtag" placeholder="@lang('locale.hashtag', ['suffix'=>''])" required>
                             </div>
                         </div>
                         <div class="block-content block-content-full text-end bg-body">
@@ -119,34 +104,27 @@
         </div>
     </div>
 
-    <div class="modal fade" id="edit-category" tabindex="-1" role="dialog" aria-labelledby="edit-category" aria-hidden="true">
+    {{-- Edit Modal --}}
+    <div class="modal fade" id="edit-hashtag" tabindex="-1" role="dialog" aria-labelledby="edit-hashtag" aria-hidden="true">
         <div class="modal-dialog modal-dialog-popout" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header block-header-default bg-primary text-white">
-                        <h3 class="block-title">@lang('locale.category', ['suffix' => app()->getLocale() == 'en' ? 'y' : ''])</h3>
+                        <h3 class="block-title">@lang('locale.hashtag', ['suffix'=>''])</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option text-danger" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-fw fa-times"></i>
                             </button>
                         </div>
                     </div>
-                    <form method="POST" id="edit-category-form">
+                    <form method="POST" id="edit-hashtag-form">
                         @csrf 
                         @method('PUT')
                         <input type="hidden" name="created_by" value="{{ auth()->id() }}">
                         <div class="block-content fs-sm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="mb-4">
-                                        <label class="form-label" for="edit-category-name">@lang('locale.categoryname') <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-control-alt" id="edit-category-name" name="name" placeholder="@lang('locale.categoryname')" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label" for="edit-category-description">@lang('locale.description')</label>
-                                        <textarea name="description" id="edit-category-description" cols="30" rows="5" class="form-control form-control-alt" placeholder="@lang('locale.description')"></textarea>
-                                    </div>
-                                </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="edit-hashtag-field">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-alt" id="edit-hashtag-field" name="hashtag" required>
                             </div>
                         </div>
                         <div class="block-content block-content-full text-end bg-body">
@@ -184,19 +162,17 @@
                 autoWidth: !1
             })
 
-            let openEditCategoryModal = (button) => {
-                const categoryId = button.getAttribute('data-id');
-                const categoryName = button.getAttribute('data-name');
-                const categoryDesc = button.getAttribute('data-description');
+            let openEditHashtagModal = (button) => {
+                const id = button.getAttribute('data-id');
+                const hashtag = button.getAttribute('data-hashtag');
 
-                document.getElementById('edit-category-name').value = categoryName;
-                document.getElementById('edit-category-description').value = categoryDesc;
+                document.getElementById('edit-hashtag-field').value = hashtag;  
 
-                const form = document.getElementById('edit-category-form');
+                const form = document.getElementById('edit-hashtag-form');
                 const baseUrl = document.querySelector('meta[name="app-url"]').getAttribute('content');
-                form.action = `${baseUrl}/categories/${categoryId}`;
+                form.action = `${baseUrl}/hashtags/${id}`;
 
-                const modal = document.getElementById('edit-category');
+                const modal = document.getElementById('edit-hashtag');
                 modal.classList.remove('hidden');
             }
         </script>

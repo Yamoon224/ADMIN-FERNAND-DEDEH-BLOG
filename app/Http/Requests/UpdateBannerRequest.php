@@ -14,10 +14,11 @@ class UpdateBannerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => ['sometimes', 'string', 'max:150'],
             'image_path' => ['sometimes', 'file', 'image', 'max:2048'],
-            'link'        => ['nullable', 'url', 'max:255'],
-            'status'      => ['nullable', 'integer'],
+            'position'   => ['sometimes', 'in:HEADER,HOMEPAGE_TOP,HOMEPAGE_MIDDLE,HOMEPAGE_BOTTOM,SIDEBAR_LEFT,SIDEBAR_RIGHT,FOOTER,POPUP,MOBILE_TOP,MOBILE_BOTTOM'],
+            'link'       => ['sometimes', 'url', 'max:255'],
+            'status'     => ['sometimes', 'in:0,1'],
+            'created_by' => ['sometimes', 'integer', 'exists:users,id'],
         ];
     }
 }
