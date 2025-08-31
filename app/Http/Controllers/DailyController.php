@@ -89,11 +89,67 @@ class DailyController extends Controller
         return view('dailys.edit', compact('hashtags', 'daily'));
     }
 
-
     public function update(UpdateDailyRequest $request, $id)
     {
-        $daily = $this->repository->update($id, $request->validated());
-        return redirect()->route('dailies.index');
+        // 1. Mise à jour des champs du Daily
+        $data = $request->only(['introduction', 'published_at', 'created_by']);
+        $daily = $this->repository->update($id, $data);
+
+        // 2. Gestion des contenus associés
+        if ($request->has('body')) {
+            foreach ($request->body as $index => $body) {
+                if (!empty($body)) {
+
+                    $path = null;
+
+                    // Si le contenu existe déjà
+                    if (isset($request->content_id[$index])) {
+                        $contentId = $request->content_id[$index];
+                        $existingContent = $this->contentRepository->find($contentId);
+
+                        if ($existingContent) {
+                            // Vérifie si une nouvelle image est uploadée
+                            if ($request->hasFile("path_image.$index")) {
+                                $file = $request->file("path_image.$index");
+                                $filename = time() . '_' . $file->getClientOriginalName();
+                                $path = 'storage/' . $file->storeAs('contents', $filename, 'public');
+
+                                // Supprime l'ancienne image si elle existe
+                                if ($existingContent->path_image && file_exists(public_path($existingContent->path_image))) {
+                                    unlink(public_path($existingContent->path_image));
+                                }
+                            }
+
+                            // Met à jour le contenu
+                            $this->contentRepository->update($contentId, [
+                                'body'       => $body,
+                                'path_image' => $path ?? $existingContent->path_image, // utilise la nouvelle image si uploadée
+                                'hashtag_id' => $request->hashtag_id[$index],
+                                'daily_id'   => $daily->id,
+                                'created_by' => $daily->created_by,
+                            ]);
+                        }
+                    } else {
+                        // Nouveau contenu
+                        if ($request->hasFile("path_image.$index")) {
+                            $file = $request->file("path_image.$index");
+                            $filename = time() . '_' . $file->getClientOriginalName();
+                            $path = 'storage/' . $file->storeAs('contents', $filename, 'public');
+                        }
+
+                        $this->contentRepository->create([
+                            'body'       => $body,
+                            'path_image' => $path,
+                            'hashtag_id' => $request->hashtag_id[$index],
+                            'daily_id'   => $daily->id,
+                            'created_by' => $daily->created_by,
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return redirect()->route('dailies.index')->with('message', __('locale.updated_successfully'));
     }
 
     public function destroy($id)
