@@ -24,6 +24,7 @@
             <div class="block-content block-content-full">
                 <form action="{{ route('dailies.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="created_by" value="{{ auth()->id() }}">
                     <div class="row">
                         <div class="col-12">
                             @if (!$errors->isEmpty())
@@ -32,10 +33,15 @@
                         </div>
                         <div class="col-12">
                             <div class="mb-4">
-                                <label class="form-label" for="introduction">@lang('locale.introduction') <span class="text-danger">*</span></label>
-                                <textarea name="body" id="introduction" cols="30" rows="5" class="form-control form-control-alt" placeholder="@lang('locale.introduction')" required></textarea>
+                                <label class="form-label" for="published_at">@lang('locale.published_at') <span class="text-danger">*</span></label>
+                                <input name="published_at" type="datetime-local" id="published_at" class="form-control form-control-alt" required></input>
                             </div>
-                            
+
+                            <div class="mb-4">
+                                <label class="form-label" for="introduction">@lang('locale.introduction') <span class="text-danger">*</span></label>
+                                <textarea name="introduction" id="introduction" cols="30" rows="5" class="form-control form-control-alt" placeholder="@lang('locale.introduction')" required></textarea>
+                            </div>
+
                             <div class="block block-rounded">
                                 <div class="block-header block-header-default">
                                     <h3 class="block-title">@lang('locale.content', ['suffix'=>''])</h3>
@@ -121,8 +127,7 @@
                     return;
                 }
 
-                const lastRow = rows[rows.length - 1]; // le dernier élément
-
+                const lastRow = rows[rows.length - 1];
                 const lastIndex = parseInt(lastRow.dataset.index);
                 const newIndex = lastIndex + 1;
 
@@ -130,16 +135,25 @@
                 const newRow = lastRow.cloneNode(true);
                 newRow.dataset.index = newIndex;
 
-                // Mise à jour des IDs et NAMES
-                newRow.querySelectorAll('select, input, textarea, label').forEach(el => {
-                    if (el.id) el.id = el.id.replace(/\[\d+\]|\d+$/, match => match.includes('[') ? `[${newIndex}]` : newIndex);
-                    if (el.name) el.name = el.name.replace(/\[\d+\]|\d+$/, match => match.includes('[') ? `[${newIndex}]` : newIndex);
+                // Supprimer toute trace de CKEditor cloné
+                newRow.querySelectorAll('.ck-editor').forEach(el => el.remove());
 
-                    // vider seulement les champs éditables visibles (pas les hidden)
-                    if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
-                        if (!el.hasAttribute('hidden')) {
-                            el.value = '';
-                        }
+                // Mise à jour des IDs, NAMES et reset des champs
+                newRow.querySelectorAll('select, input, textarea, label').forEach(el => {
+                    if (el.id) {
+                        el.id = el.id.replace(/\[\d+\]|\d+$/, match =>
+                            match.includes('[') ? `[${newIndex}]` : newIndex
+                        );
+                    }
+                    if (el.name) {
+                        el.name = el.name.replace(/\[\d+\]|\d+$/, match =>
+                            match.includes('[') ? `[${newIndex}]` : newIndex
+                        );
+                    }
+
+                    // reset uniquement les champs visibles
+                    if ((el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') && !el.hasAttribute('hidden')) {
+                        el.value = '';
                     }
                 });
 

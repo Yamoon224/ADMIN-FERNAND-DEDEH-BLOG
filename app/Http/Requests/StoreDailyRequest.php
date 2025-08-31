@@ -14,7 +14,8 @@ class StoreDailyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'published_at' => ['required', 'date'],
+            'introduction' => ['required'],
+            'published_at' => ['required'],
             'created_by'   => ['required', 'integer', 'exists:users,id'],
         ];
     }

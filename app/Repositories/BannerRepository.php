@@ -11,9 +11,9 @@ class BannerRepository
         return Banner::with($with)->get();
     }
 
-    public function paginate(array $with = [], int $page = 10)
+    public function paginate(array $positions = [], array $with = [], int $page = 10)
     {
-        return Banner::with($with)->paginate($page);
+        return Banner::with($with)->whereIn('position', $positions)->paginate($page);
     }
 
     public function find(int $id, array $with = [])

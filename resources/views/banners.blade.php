@@ -22,26 +22,169 @@
             </div>
         </div>
     </div>
+
     <div class="content">
-        <div class="block block-rounded">
+        <div class="block block-rounded overflow-hidden">
             <div class="block-header block-header-default d-flex align-items-center justify-content-between">
-                <h3 class="block-title">
-                    @lang('locale.banner', ['suffix' => 's'])
-                </h3>
+                <div class="block-title">
+                    <ul class="nav nav-tabs nav-tabs-block" role="tablist">
+                        <li class="nav-item">
+                            <button type="button" class="nav-link active" id="horizontal_banners-tab" data-bs-toggle="tab"
+                                data-bs-target="#horizontal_banners" role="tab" aria-controls="horizontal_banners"
+                                aria-selected="true">@lang('locale.horizontal_banners')</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="nav-link" id="sidebar_banners-tab" data-bs-toggle="tab"
+                                data-bs-target="#sidebar_banners" role="tab" aria-controls="sidebar_banners"
+                                aria-selected="false">@lang('locale.sidebar_banners')</button>
+                        </li>
+                    </ul>
+                </div>
                 <a role="button" data-bs-toggle="modal" data-bs-target="#add-banner" class="btn btn-sm btn-success">
                     <i class="si si-plus me-1"></i> @lang('locale.add', ['param' => ''])
                 </a>
             </div>
-            <div class="block-content block-content-full overflow-x-auto">
-                @foreach ($banners as $item)
-                <div class="col-12 col-md-6">
-                    <a class="block block-rounded" href="{{ $item->link }}">
-                        <div class="block-content">
-                            <p class="text-center py-6">...</p>
+            <div class="block-content tab-content overflow-hidden">
+                <div class="tab-pane fade fade-up show active" id="horizontal_banners" role="tabpanel"
+                    aria-labelledby="horizontal_banners-tab" tabindex="0">
+                    @session('message')
+                    <div class="fs-4 fw-semibold p-2 mb-4 border-start border-4 border-success bg-body-light">{{ session('message') }}</div>
+                    @endsession
+                    
+                    @foreach ($horizontales as $item)
+                    <div class="block block-rounded bg-transparent bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
+                        <div class="block-content block-content-full bg-primary-dark-op">
+                            <div class="py-4 text-center">
+                                <h1 class="h3 text-white fw-bold mb-2">{{ $item->position }}</h1>
+                                <h2 class="h6 fw-medium text-white-75 mb-0">{{ $item->link }}</h2>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a 
+                                        role="button"
+                                        class="btn btn-sm btn-primary"
+                                        data-id="{{ $item->id }}"
+                                        data-link="{{ $item->link }}"
+                                        data-position="{{ $item->position }}"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#edit-banner"
+                                        onclick="openEditbannerModal(this)"
+                                    >
+                                        <i class="si si-note me-1"></i>
+                                    </a>
+                                
+                                    <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                        onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="si si-trash me-1"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
+                    @endforeach
+                    
+                    @if($horizontales->isNotEmpty())
+                    <div class="d-flex justify-content-center">
+                        <nav aria-label="Projects Search Navigation">
+                            <ul class="pagination pagination-sm">
+                                {{-- Lien "Précédent" --}}
+                                <li class="page-item {{ $horizontales->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $horizontales->previousPageUrl() ?? 'javascript:void(0)' }}" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                </li>
+                        
+                                {{-- Numéros de pages --}}
+                                @foreach ($horizontales->getUrlRange(1, $horizontales->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $horizontales->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                        
+                                {{-- Lien "Suivant" --}}
+                                <li class="page-item {{ $horizontales->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $horizontales->nextPageUrl() ?? 'javascript:void(0)' }}" aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @endif              
                 </div>
-                @endforeach
+                <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
+                    aria-labelledby="sidebar_banners-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($verticales as $item)
+                        <div class="col-sm-4">
+                            <div class="block block-rounded bg-transparent bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
+                                <div class="block-content">
+                                    <h1 class="h3 text-white fw-bold mb-2">{{ $item->position }}</h1>
+                                    <h2 class="h6 fw-medium text-white-75 mb-0">{{ $item->link }}</h2>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a 
+                                            role="button"
+                                            class="btn btn-sm btn-primary"
+                                            data-id="{{ $item->id }}"
+                                            data-link="{{ $item->link }}"
+                                            data-position="{{ $item->position }}"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#edit-banner"
+                                            onclick="openEditbannerModal(this)"
+                                        >
+                                            <i class="si si-note me-1"></i>
+                                        </a>
+                                    
+                                        <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                            onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="si si-trash me-1"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                    @if($verticales->isNotEmpty())
+                    <div class="d-flex justify-content-center">
+                        <nav aria-label="Projects Search Navigation">
+                            <ul class="pagination pagination-sm">
+                                {{-- Lien "Précédent" --}}
+                                <li class="page-item {{ $verticales->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $verticales->previousPageUrl() ?? 'javascript:void(0)' }}" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                </li>
+                        
+                                {{-- Numéros de pages --}}
+                                @foreach ($verticales->getUrlRange(1, $verticales->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $verticales->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                        
+                                {{-- Lien "Suivant" --}}
+                                <li class="page-item {{ $verticales->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $verticales->nextPageUrl() ?? 'javascript:void(0)' }}" aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -60,22 +203,44 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('banners.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="created_by" value="{{ auth()->id() }}">
                         <div class="block-content fs-sm">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-4">
-                                        <label class="form-label" for="name">@lang('locale.bannername') <span
+                                        <label class="form-label" for="name">@lang('locale.behind_link') <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-control-alt" id="name"
-                                            name="name" placeholder="@lang('locale.bannername')" required>
+                                        <input type="text" class="form-control form-control-alt" id="link"
+                                            name="link" placeholder="Ex: https://" required>
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label" for="phone">@lang('locale.description')</label>
-                                        <textarea name="description" id="" cols="30" rows="5" class="form-control form-control-alt"
-                                            placeholder="@lang('locale.description')"></textarea>
+                                        <label class="form-label" for="position">@lang('locale.position') <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="position" name="position" required>
+                                            <option value="">-- @lang('locale.select') --</option>
+                                            @foreach ([
+                                                        'HEADER' => 'En-tête',
+                                                        'HOMEPAGE_TOP' => 'Accueil - Haut',
+                                                        'HOMEPAGE_MIDDLE' => 'Accueil - Milieu',
+                                                        'HOMEPAGE_BOTTOM' => 'Accueil - Bas',
+                                                        'SIDEBAR_LEFT' => 'Barre latérale gauche',
+                                                        'SIDEBAR_RIGHT' => 'Barre latérale droite',
+                                                        'FOOTER' => 'Pied de page',
+                                                        'POPUP' => 'Fenêtre pop-up',
+                                                        'MOBILE_TOP' => 'Mobile - Haut',
+                                                        'MOBILE_BOTTOM' => 'Mobile - Bas',
+                                                    ] as $key => $item)
+                                                <option value="{{ $key }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="image_path">@lang('locale.image') <span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control form-control-alt" id="image_path"
+                                            name="image_path" placeholder="@lang('locale.image_path')" required>
                                     </div>
                                 </div>
                             </div>
@@ -90,8 +255,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="edit-banner" tabindex="-1" role="dialog" aria-labelledby="edit-banner"
-        aria-hidden="true">
+    <div class="modal fade" id="edit-banner" tabindex="-1" role="dialog" aria-labelledby="edit-banner" aria-hidden="true">
         <div class="modal-dialog modal-dialog-popout" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
@@ -104,25 +268,42 @@
                             </button>
                         </div>
                     </div>
-                    <form method="POST" id="edit-banner-form">
+                    <form method="POST" id="edit-banner-form" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="created_by" value="{{ auth()->id() }}">
+                        <input type="hidden" name="updated_by" value="{{ auth()->id() }}">
                         <div class="block-content fs-sm">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-4">
-                                        <label class="form-label" for="edit-banner-name">@lang('locale.bannername') <span
-                                                class="text-danger">*</span></label>
+                                        <label class="form-label" for="edit-banner-link">@lang('locale.behind_link') <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control form-control-alt"
-                                            id="edit-banner-name" name="name" placeholder="@lang('locale.bannername')"
-                                            required>
+                                            id="edit-banner-link" name="link" required>
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label"
-                                            for="edit-banner-description">@lang('locale.description')</label>
-                                        <textarea name="description" id="edit-banner-description" cols="30" rows="5"
-                                            class="form-control form-control-alt" placeholder="@lang('locale.description')"></textarea>
+                                        <label class="form-label" for="edit-banner-position">@lang('locale.position') <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="edit-banner-position" name="position" required>
+                                            <option value="">-- @lang('locale.select') --</option>
+                                            @foreach ([
+                                                'HEADER' => 'En-tête',
+                                                'HOMEPAGE_TOP' => 'Accueil - Haut',
+                                                'HOMEPAGE_MIDDLE' => 'Accueil - Milieu',
+                                                'HOMEPAGE_BOTTOM' => 'Accueil - Bas',
+                                                'SIDEBAR_LEFT' => 'Barre latérale gauche',
+                                                'SIDEBAR_RIGHT' => 'Barre latérale droite',
+                                                'FOOTER' => 'Pied de page',
+                                                'POPUP' => 'Fenêtre pop-up',
+                                                'MOBILE_TOP' => 'Mobile - Haut',
+                                                'MOBILE_BOTTOM' => 'Mobile - Bas',
+                                            ] as $key => $item)
+                                                <option value="{{ $key }}">{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="edit-banner-image">@lang('locale.image')</label>
+                                        <input type="file" class="form-control form-control-alt"
+                                            id="edit-banner-image" name="image_path">
                                     </div>
                                 </div>
                             </div>
@@ -139,46 +320,19 @@
 
     @push('scripts')
         <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables/dataTables.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons-jszip/jszip.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons-pdfmake/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons-pdfmake/vfs_fonts.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
-        <script src="{{ asset('js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
         <script>
-            "use strict";
-            $(".js-dataTable-buttons").DataTable({
-                pagingType: "simple_numbers",
-                layout: {
-                    topStart: {
-                        buttons: ["copy", "excel", "csv", "pdf", "print"]
-                    }
-                },
-                pageLength: 10,
-                autoWidth: !1
-            })
-
             let openEditbannerModal = (button) => {
                 const bannerId = button.getAttribute('data-id');
-                const bannerName = button.getAttribute('data-name');
-                const bannerDesc = button.getAttribute('data-description');
+                const bannerPosition = button.getAttribute('data-position');
+                const bannerLink = button.getAttribute('data-link');
 
-                document.getElementById('edit-banner-name').value = bannerName;
-                document.getElementById('edit-banner-description').value = bannerDesc;
+                document.getElementById('edit-banner-position').value = bannerPosition;
+                document.getElementById('edit-banner-link').value = bannerLink;
 
                 const form = document.getElementById('edit-banner-form');
                 const baseUrl = document.querySelector('meta[name="app-url"]').getAttribute('content');
-                form.action = `${baseUrl}/categories/${bannerId}`;
-
-                const modal = document.getElementById('edit-banner');
-                modal.classList.remove('hidden');
-            }
+                form.action = `${baseUrl}/banners/${bannerId}`;
+            };
         </script>
-        {{-- <script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script> --}}
     @endpush
 </x-app-layout>

@@ -15,7 +15,12 @@ abstract class BaseRepository
 
     public function all(array $with = [])
     {
-        return $this->model->with($with)->get();
+        return $this->model->with($with)->orderByDesc('id')->get();
+    }
+
+    public function paginate(array $with = [], int $page = 10)
+    {
+        return $this->model->with($with)->orderByDesc('id')->paginate($page);
     }
 
     public function find(int $id, array $with = [])

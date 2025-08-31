@@ -6,7 +6,6 @@ use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\Repositories\BannerRepository;
 use App\Http\Resources\BannerResource;
-use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -20,8 +19,9 @@ class BannerController extends Controller
 
     public function index()
     {
-        $banners = $this->repository->paginate();
-        return view('banners', compact('banners'));
+        $horizontales = $this->repository->paginate(['HEADER','HOMEPAGE_TOP','HOMEPAGE_MIDDLE','HOMEPAGE_BOTTOM', 'FOOTER','POPUP','MOBILE_TOP','MOBILE_BOTTOM']);
+        $verticales = $this->repository->paginate(['SIDEBAR_LEFT','SIDEBAR_RIGHT']);
+        return view('banners', compact('horizontales', 'verticales'));
     }
 
     public function store(StoreBannerRequest $request)
@@ -36,15 +36,12 @@ class BannerController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
 
             // Stocke le fichier dans le disque 'public', dossier 'banners'
-            $path = $file->storeAs('banners', $filename, 'public');
-
-            // Met à jour le champ 'path' avec le chemin relatif
-            $data['image_path'] = $path;
+            $data['image_path'] = 'storage/'.$file->storeAs('banners', $filename, 'public');
         }
 
         $banner = $this->repository->create($data);
 
-        return redirect()->route('banners.index');
+        return redirect()->route('banners.index')->with(['message'=>'Bannière Ajoutée avec succès!']);
     }
 
 
@@ -56,10 +53,9 @@ class BannerController extends Controller
 
     public function update(UpdateBannerRequest $request, $id)
     {
-        $banner = $this->repository->find($id); // Récupère l'enregistrement existant
         $data = $request->validated();
 
-        // Vérifie si un nouveau fichier a été uploadé pour 'path'
+        // Vérifie si un fichier a été uploadé pour 'path'
         if ($request->hasFile('image_path')) {
             $file = $request->file('image_path');
 
@@ -67,18 +63,10 @@ class BannerController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
 
             // Stocke le fichier dans le disque 'public', dossier 'banners'
-            $path = $file->storeAs('banners', $filename, 'public');
-
-            // Supprime l'ancienne image si elle existe
-            if ($banner->path && Storage::disk('public')->exists($banner->path)) {
-                Storage::disk('public')->delete($banner->path);
-            }
-
-            // Met à jour le champ 'path' avec le nouveau chemin
-            $data['image_path'] = $path;
+            $data['image_path'] = 'storage/'.$file->storeAs('banners', $filename, 'public');
         }
 
-        $banner = $this->repository->update($id, $data);
+        $this->repository->update($id, $data);
 
         return redirect()->route('banners.index');
     }
