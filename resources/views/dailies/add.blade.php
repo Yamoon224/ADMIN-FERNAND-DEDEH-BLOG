@@ -46,9 +46,9 @@
                                 <div class="block-header block-header-default">
                                     <h3 class="block-title">@lang('locale.content', ['suffix'=>''])</h3>
                                 </div>
-                                <div class="block-content block-content-full border-bottom border-warning mb-4" style="border-bottom-width:2px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
+                                <div class="block-content block-content-full" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
                                     <div class="hashtag-row" data-index="0">
-                                        <div class="row align-items-start">
+                                        <div class="row align-items-start border-bottom border-warning mb-4" style="border-bottom-width:2px;">
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="hashtag_id[0]">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
