@@ -8,7 +8,7 @@ class BannerRepository
 {
     public function all(array $with = [])
     {
-        return Banner::with($with)->get();
+        return Banner::with($with)->orderByDesc('id')->get();
     }
 
     public function paginate(array $positions = [], array $with = [], int $page = 10)
@@ -33,8 +33,9 @@ class BannerRepository
         return $banner;
     }
 
-    public function delete(Banner $banner): bool
+    public function delete(string $id): bool
     {
+        $banner = Banner::find($id);
         return $banner->delete();
     }
 }
