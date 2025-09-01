@@ -14,6 +14,7 @@ class DailyResource extends JsonResource
     {
         return [
             'id'           => $this->id,
+            'introduction' => $this->introduction,
             'published_at' => $this->published_at,
             'created_at'   => $this->created_at,
             'updated_at'   => $this->updated_at,
@@ -21,7 +22,6 @@ class DailyResource extends JsonResource
             'created_by'   => $this->created_by,
             'creator'      => new UserResource($this->whenLoaded('creator')), // relation avec users
             'contents'     => ContentResource::collection($this->whenLoaded('contents')), // relation avec contents
-            'questions'    => QuestionResource::collection($this->whenLoaded('questions')), // relation avec questions
         ];
     }
 }

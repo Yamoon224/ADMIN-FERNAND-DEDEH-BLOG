@@ -32,6 +32,7 @@ class DailyController extends Controller
      *             @OA\Items(
      *                 type="object",
      *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="introduction", type="string",),
      *                 @OA\Property(property="published_at", type="string", format="date-time"),
      *                 @OA\Property(
      *                     property="contents",
@@ -56,7 +57,7 @@ class DailyController extends Controller
      */
     public function index()
     {
-        return DailyResource::collection($this->repository->all(['user', 'contents']));
+        return DailyResource::collection($this->repository->all(['user', 'contents.hashtag']));
     }
 
     public function store(StoreDailyRequest $request)
