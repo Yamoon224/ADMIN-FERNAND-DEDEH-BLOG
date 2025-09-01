@@ -46,8 +46,8 @@
                                 <div class="block-header block-header-default">
                                     <h3 class="block-title">@lang('locale.content', ['suffix'=>''])</h3>
                                 </div>
-                                <div class="block-content block-content-full">
-                                    <div class="hashtag-row" data-index="0" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
+                                <div class="block-content block-content-full" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
+                                    <div class="hashtag-row" data-index="0">
                                         <div class="row align-items-start">
                                             <div class="col-lg-6">
                                                 <div class="mb-4">
