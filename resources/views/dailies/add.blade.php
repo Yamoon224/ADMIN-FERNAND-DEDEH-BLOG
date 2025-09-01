@@ -42,7 +42,7 @@
                                 <textarea name="introduction" id="introduction" cols="30" rows="5" class="form-control form-control-alt" placeholder="@lang('locale.introduction')" required></textarea>
                             </div>
 
-                            <div class="block block-rounded">
+                            <div class="block block-rounded p-2">
                                 <div class="block-header block-header-default">
                                     <h3 class="block-title">@lang('locale.content', ['suffix'=>''])</h3>
                                 </div>
