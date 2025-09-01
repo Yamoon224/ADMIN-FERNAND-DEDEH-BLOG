@@ -121,45 +121,48 @@
                     <div class="row">
                         @foreach ($verticales as $item)
                         <div class="col-md-6 col-xl-4">
-                            <a class="block block-rounded bg-image h-100 mb-0" style="background-image: url('{{ asset($item->image_path) }}');" href="javascript:void(0)">
+                            <a class="block block-rounded bg-image h-100 mb-0" 
+                               style="background-image: url('{{ asset($item->image_path) }}');" 
+                               href="javascript:void(0)">
+                               
                                 <div class="block-content bg-black-50">
-                                    <div class="mb-5 mb-sm-7 d-sm-flex justify-content-sm-between align-items-sm-center">
-                                        <p>
-                                            <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
-                                        </p>
-                                        <p class="fs-sm">
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <a 
-                                                    role="button"
-                                                    class="btn btn-sm btn-primary"
-                                                    data-id="{{ $item->id }}"
-                                                    data-link="{{ $item->link }}"
-                                                    data-position="{{ $item->position }}"
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#edit-banner"
-                                                    onclick="openEditbannerModal(this)"
-                                                >
-                                                    <i class="si si-note me-1"></i>
-                                                </a>
-                                            
-                                                <form action="{{ route('banners.destroy', $item->id) }}" method="post"
-                                                    onsubmit="return confirm('@lang('locale.confirm_delete')')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger">
-                                                        <i class="si si-trash me-1"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </p>
+                                    <div class="mb-5 mb-sm-7 d-flex justify-content-between align-items-center">
+                                        <!-- Badge position à gauche -->
+                                        <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
+                        
+                                        <!-- Boutons à droite -->
+                                        <div class="d-flex gap-2">
+                                            <!-- Bouton edit -->
+                                            <a 
+                                                role="button"
+                                                class="btn btn-sm btn-primary"
+                                                data-id="{{ $item->id }}"
+                                                data-link="{{ $item->link }}"
+                                                data-position="{{ $item->position }}"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#edit-banner"
+                                                onclick="openEditbannerModal(this)"
+                                            >
+                                                <i class="si si-note me-1"></i>
+                                            </a>
+                        
+                                            <!-- Bouton delete -->
+                                            <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                                  onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="si si-trash me-1"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <p class="fs-lg fw-bold text-white mb-0">
-                                        {{ $item->link }}
-                                    </p>
+                        
+                                    <p class="fs-lg fw-bold text-white mb-0">{{ $item->link }}</p>
                                     <p class="fw-medium text-white-75"><a href="{{ $item->link }}">@lang('locale.link')</a></p>
                                 </div>
                             </a>
-                          </div>
+                        </div>
                         @endforeach
                     </div>
 
