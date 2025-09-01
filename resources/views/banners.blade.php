@@ -121,13 +121,11 @@
                     <div class="row">
                         @foreach ($verticales as $item)
                         <div class="col-md-6 col-xl-4">
-                            <a class="block block-rounded bg-image h-100 mb-0" style="background-image: url('{{ asset("media/photos/photo9.jpg") }}');" href="javascript:void(0)">
+                            <a class="block block-rounded bg-image h-100 mb-0" style="background-image: url('{{ asset($item->image_path) }}');" href="javascript:void(0)">
                               <div class="block-content bg-black-50">
                                 <div class="mb-5 mb-sm-7 d-sm-flex justify-content-sm-between align-items-sm-center">
                                   <p>
-                                    <span class="badge bg-primary fw-bold p-2 text-uppercase">
-                                      Travel
-                                    </span>
+                                    <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
                                   </p>
                                   <p class="fs-sm">
                                     <span class="text-white fw-semibold me-1">
@@ -144,9 +142,7 @@
                                 <p class="fs-lg fw-bold text-white mb-0">
                                   Exploring the forest in the mist
                                 </p>
-                                <p class="fw-medium text-white-75">
-                                  Albert Ray &middot; 12 min
-                                </p>
+                                <p class="fw-medium text-white-75">{{ $item->link }}</p>
                               </div>
                             </a>
                           </div>
