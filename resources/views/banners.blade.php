@@ -142,7 +142,7 @@
                                 <p class="fs-lg fw-bold text-white mb-0">
                                   Exploring the forest in the mist
                                 </p>
-                                <p class="fw-medium text-white-75"><a href="{{ $item->link }}">@lang('locale.link')</a></p>
+                                <p class="fw-medium text-white-75">{{ $item->link }}</p>
                               </div>
                             </a>
                           </div>
