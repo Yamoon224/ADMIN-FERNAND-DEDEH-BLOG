@@ -127,10 +127,28 @@
                                     href="javascript:void(0)">
                                     <div class="block-content block-content-full bg-modern-op ratio ratio-1x1">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div>
-                                                <i class="far fa-2x fa-envelope-open text-white"></i>
-                                                <div class="fs-sm fw-semibold mt-3 text-uppercase text-white">Messages
-                                                </div>
+                                            <div class="d-flex justify-content-center gap-2">
+                                                <a 
+                                                    role="button"
+                                                    class="btn btn-sm btn-primary"
+                                                    data-id="{{ $item->id }}"
+                                                    data-link="{{ $item->link }}"
+                                                    data-position="{{ $item->position }}"
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#edit-banner"
+                                                    onclick="openEditbannerModal(this)"
+                                                >
+                                                    <i class="si si-note me-1"></i>
+                                                </a>
+                                            
+                                                <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                                    onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="si si-trash me-1"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
