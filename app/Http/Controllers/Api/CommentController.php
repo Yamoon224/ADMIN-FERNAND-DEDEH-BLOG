@@ -61,6 +61,53 @@ class CommentController extends Controller
         return CommentResource::collection($this->repository->all(['user', 'question']));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/comments",
+     *     operationId="storeComment",
+     *     tags={"Comments"},
+     *     summary="Create a new comment",
+     *     description="Creates a new comment for a specific question",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             required={"question_id"},
+     *             @OA\Property(property="comments", type="string", example="This is my comment"),
+     *             @OA\Property(property="question_id", type="integer", example=5)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Comment created successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="id", type="integer", example=10),
+     *             @OA\Property(property="comments", type="string", example="This is my comment"),
+     *             @OA\Property(property="question_id", type="integer", example=5),
+     *             @OA\Property(
+     *                 property="question",
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=5),
+     *                 @OA\Property(property="body", type="string", example="Question body")
+     *             ),
+     *             @OA\Property(
+     *                 property="user",
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=2),
+     *                 @OA\Property(property="name", type="string", example="John Doe")
+     *             ),
+     *             @OA\Property(property="created_at", type="string", format="date-time"),
+     *             @OA\Property(property="updated_at", type="string", format="date-time"),
+     *             @OA\Property(property="deleted_at", type="string", format="date-time", nullable=true)
+     *         )
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=401, description="Unauthenticated"),
+     *     @OA\Response(response=403, description="Forbidden"),
+     *     @OA\Response(response=422, description="Validation error")
+     * )
+     */
     public function store(StoreCommentRequest $request)
     {
         $comment = $this->repository->create($request->validated());
