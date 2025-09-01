@@ -49,7 +49,7 @@
                                 <div class="block-content block-content-full" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
                                     <div class="hashtag-row" data-index="0">
                                         <div class="row align-items-start">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6 col-md-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="hashtag_id[0]">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
                                                     <select class="form-select" id="hashtag_id[0]" name="hashtag_id[0]" required>
@@ -60,7 +60,7 @@
                                                 </div>
                                             </div>
                                     
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6 col-md-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="path_image[0]">@lang('locale.hashtag_image')</label>
                                                     <input type="file" class="form-control form-control-alt" id="path_image[0]" name="path_image[0]" placeholder="@lang('locale.path_image')">
