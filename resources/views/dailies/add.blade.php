@@ -106,75 +106,80 @@
     @push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let editors = {}; // stocke les instances CKEditor
+        // Bouton "Ajouter hashtag"
+        document.getElementById('addHashtag').addEventListener('click', function () {
+            const rows = document.querySelectorAll('.hashtag-row');
+            if (rows.length === 0) {
+                console.error("Aucune .hashtag-row trouvée !");
+                return;
+            }
 
-            // Initialise le premier éditeur
-            ClassicEditor
-                .create(document.querySelector('#editor0'))
-                .then(editor => {
-                    editors[0] = editor;
-                    editor.model.document.on('change:data', () => {
-                        document.querySelector('#content-hidden-0').value = editor.getData();
-                    });
-                });
+            const lastRow = rows[rows.length - 1];
+            const lastIndex = parseInt(lastRow.dataset.index);
+            const newIndex = lastIndex + 1;
 
-            // Bouton "Ajouter hashtag"
-            document.getElementById('addHashtag').addEventListener('click', function () {
-                const rows = document.querySelectorAll('.hashtag-row');
-                if (rows.length === 0) {
-                    console.error("Aucune .hashtag-row trouvée !");
-                    return;
+            // Cloner la ligne
+            const newRow = lastRow.cloneNode(true);
+            newRow.dataset.index = newIndex;
+
+            // Supprimer toute trace de CKEditor cloné
+            newRow.querySelectorAll('.ck-editor').forEach(el => el.remove());
+
+            // Mise à jour des IDs, NAMES et reset des champs
+            newRow.querySelectorAll('select, input, textarea, label').forEach(el => {
+                if (el.id) {
+                    el.id = el.id.replace(/\[\d+\]|\d+$/, match =>
+                        match.includes('[') ? `[${newIndex}]` : newIndex
+                    );
+                }
+                if (el.name) {
+                    el.name = el.name.replace(/\[\d+\]|\d+$/, match =>
+                        match.includes('[') ? `[${newIndex}]` : newIndex
+                    );
                 }
 
-                const lastRow = rows[rows.length - 1];
-                const lastIndex = parseInt(lastRow.dataset.index);
-                const newIndex = lastIndex + 1;
-
-                // Cloner la ligne
-                const newRow = lastRow.cloneNode(true);
-                newRow.dataset.index = newIndex;
-
-                // Supprimer toute trace de CKEditor cloné
-                newRow.querySelectorAll('.ck-editor').forEach(el => el.remove());
-
-                // Mise à jour des IDs, NAMES et reset des champs
-                newRow.querySelectorAll('select, input, textarea, label').forEach(el => {
-                    if (el.id) {
-                        el.id = el.id.replace(/\[\d+\]|\d+$/, match =>
-                            match.includes('[') ? `[${newIndex}]` : newIndex
-                        );
-                    }
-                    if (el.name) {
-                        el.name = el.name.replace(/\[\d+\]|\d+$/, match =>
-                            match.includes('[') ? `[${newIndex}]` : newIndex
-                        );
-                    }
-
-                    // reset uniquement les champs visibles
-                    if ((el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') && !el.hasAttribute('hidden')) {
-                        el.value = '';
-                    }
-                });
-
-                lastRow.after(newRow);
-
-                // Réinit CKEditor pour le nouveau textarea
-                const newEditor = newRow.querySelector(`textarea[id^="editor"]`);
-                const newHidden = newRow.querySelector(`textarea[name^="body"]`);
-
-                if (newEditor) {
-                    ClassicEditor
-                        .create(newEditor)
-                        .then(editor => {
-                            if (newHidden) {
-                                editor.model.document.on('change:data', () => {
-                                    newHidden.value = editor.getData();
-                                });
-                            }
-                        });
+                // reset uniquement les champs visibles
+                if ((el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') && !el.hasAttribute('hidden')) {
+                    el.value = '';
                 }
             });
+
+            // Ajouter bouton "Supprimer" si pas déjà présent
+            if (!newRow.querySelector('.removeHashtag')) {
+                const btnWrapper = document.createElement('div');
+                btnWrapper.classList.add('mb-4', 'text-end');
+
+                const removeBtn = document.createElement('button');
+                removeBtn.type = "button";
+                removeBtn.className = "btn btn-sm btn-danger removeHashtag";
+                removeBtn.innerHTML = `<i class="si si-trash me-1"></i> Supprimer`;
+
+                removeBtn.addEventListener('click', function () {
+                    newRow.remove();
+                });
+
+                btnWrapper.appendChild(removeBtn);
+                newRow.appendChild(btnWrapper);
+            }
+
+            // Insérer la nouvelle ligne après la précédente
+            lastRow.after(newRow);
+
+            // Réinit CKEditor pour le nouveau textarea
+            const newEditor = newRow.querySelector(`textarea[id^="editor"]`);
+            const newHidden = newRow.querySelector(`textarea[name^="body"]`);
+
+            if (newEditor) {
+                ClassicEditor
+                    .create(newEditor)
+                    .then(editor => {
+                        if (newHidden) {
+                            editor.model.document.on('change:data', () => {
+                                newHidden.value = editor.getData();
+                            });
+                        }
+                    });
+            }
         });
     </script>         
     @endpush
