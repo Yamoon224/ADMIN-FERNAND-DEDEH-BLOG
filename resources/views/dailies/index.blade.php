@@ -29,7 +29,7 @@
             <div class="block-content block-content-full overflow-x-auto">
                 <div class="row">
                     @foreach ($dailies as $item)
-                    <div class="col-12 border-bottom border-warning mb-2" style="border-bottom-width:2px;">
+                    <div class="col-12 border-bottom border-warning mb-4" style="border-bottom-width:2px;">
                         <h4 class="h5 mb-1">
                             <a href="{{ route('dailies.show', $item->id) }}" title="@lang('locale.show', ['param'=>__('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'y' : '']).' #'.$item->id])">
                                 @lang('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'y' : '']) #{{ $item->id }}
