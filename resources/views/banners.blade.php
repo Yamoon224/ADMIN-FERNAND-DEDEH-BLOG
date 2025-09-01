@@ -119,7 +119,7 @@
                 </div>
                 <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
-                    <div class="row">
+                    <div class="row mb-2">
                         @foreach ($verticales as $item)  
                         <div class="col-md-6 col-xl-4">
                             <div class="block block-rounded text-center bg-image h-100 mb-0"
@@ -159,39 +159,39 @@
                     </div>
 
                     @if ($verticales->isNotEmpty())
-                        <div class="d-flex justify-content-center">
-                            <nav aria-label="Projects Search Navigation">
-                                <ul class="pagination pagination-sm">
-                                    {{-- Lien "Précédent" --}}
-                                    <li class="page-item {{ $verticales->onFirstPage() ? 'disabled' : '' }}">
-                                        <a class="page-link"
-                                            href="{{ $verticales->previousPageUrl() ?? 'javascript:void(0)' }}"
-                                            aria-label="Previous">
-                                            <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </a>
-                                    </li>
+                    <div class="d-flex justify-content-center">
+                        <nav aria-label="Projects Search Navigation">
+                            <ul class="pagination pagination-sm">
+                                {{-- Lien "Précédent" --}}
+                                <li class="page-item {{ $verticales->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link"
+                                        href="{{ $verticales->previousPageUrl() ?? 'javascript:void(0)' }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </a>
+                                </li>
 
-                                    {{-- Numéros de pages --}}
-                                    @foreach ($verticales->getUrlRange(1, $verticales->lastPage()) as $page => $url)
-                                        <li
-                                            class="page-item {{ $verticales->currentPage() == $page ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @endforeach
-
-                                    {{-- Lien "Suivant" --}}
-                                    <li class="page-item {{ $verticales->hasMorePages() ? '' : 'disabled' }}">
-                                        <a class="page-link"
-                                            href="{{ $verticales->nextPageUrl() ?? 'javascript:void(0)' }}"
-                                            aria-label="Next">
-                                            <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </a>
+                                {{-- Numéros de pages --}}
+                                @foreach ($verticales->getUrlRange(1, $verticales->lastPage()) as $page => $url)
+                                    <li
+                                        class="page-item {{ $verticales->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                     </li>
-                                </ul>
-                            </nav>
-                        </div>
+                                @endforeach
+
+                                {{-- Lien "Suivant" --}}
+                                <li class="page-item {{ $verticales->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link"
+                                        href="{{ $verticales->nextPageUrl() ?? 'javascript:void(0)' }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                     @endif
                 </div>
             </div>
