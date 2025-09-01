@@ -127,12 +127,14 @@
                                href="javascript:void(0)">
                                 <div class="block-content bg-black-50">
                                     <div class="mb-5 mb-sm-7 d-sm-flex justify-content-sm-between align-items-sm-center">
-                                        <p>
+                                        
+                                        <!-- Badge à gauche -->
+                                        <p class="mb-0">
                                             <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
                                         </p>
                         
-                                        <!-- Remplacement des stats par les boutons -->
-                                        <div class="d-flex justify-content-center gap-2">
+                                        <!-- Boutons à droite -->
+                                        <div class="d-flex align-items-center gap-2">
                                             <a 
                                                 role="button"
                                                 class="btn btn-sm btn-primary"
@@ -155,6 +157,7 @@
                                                 </button>
                                             </form>
                                         </div>
+                        
                                     </div>
                         
                                     <p class="fs-lg fw-bold text-white mb-0">
@@ -163,7 +166,7 @@
                                     <p class="fw-medium text-white-75">{{ $item->link }}</p>
                                 </div>
                             </a>
-                        </div>                        
+                        </div>
                         @endforeach
                     </div>
 
