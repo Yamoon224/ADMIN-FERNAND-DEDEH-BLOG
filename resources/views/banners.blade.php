@@ -119,40 +119,40 @@
                 </div>
                 <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
-                    <div class="row mb-2">
+                    <div class="row">
                         @foreach ($verticales as $item)  
                         <div class="col-md-6 col-xl-4">
-                            <!-- Bloc image + texte centré -->
-                            <a class="block block-rounded text-center bg-image h-100 mb-0"
+                            <div class="block block-rounded text-center bg-image h-100 mb-0"
                                style="background-image: url('{{ asset($item->image_path) }}');"
                                href="javascript:void(0)">
+                               
+                                <!-- Body avec texte centré -->
                                 <div class="block-content block-content-full d-flex justify-content-center align-items-center ratio ratio-1x1">
                                     <div class="fs-lg fw-bold text-white">   
                                         {{ $item->position }}
                                     </div>   
+                                </div>                        
+                                <!-- Footer avec boutons -->
+                                <div class="block-content block-content-full d-flex justify-content-center gap-2">
+                                    <a role="button" class="btn btn-sm btn-primary"
+                                       data-id="{{ $item->id }}"
+                                       data-link="{{ $item->link }}"
+                                       data-position="{{ $item->position }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit-banner"
+                                       onclick="openEditbannerModal(this)">
+                                        <i class="si si-note me-1"></i>
+                                    </a>
+                        
+                                    <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                          onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="si si-trash me-1"></i>
+                                        </button>
+                                    </form>
                                 </div>
-                            </a>
-                        
-                            <!-- Footer avec boutons, en dehors du <a> -->
-                            <div class="block-content block-content-full d-flex justify-content-center gap-2 mb-2">
-                                <a role="button" class="btn btn-sm btn-primary"
-                                   data-id="{{ $item->id }}"
-                                   data-link="{{ $item->link }}"
-                                   data-position="{{ $item->position }}"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#edit-banner"
-                                   onclick="openEditbannerModal(this)">
-                                    <i class="si si-note me-1"></i>
-                                </a>
-                        
-                                <form action="{{ route('banners.destroy', $item->id) }}" method="post"
-                                      onsubmit="return confirm('@lang('locale.confirm_delete')')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="si si-trash me-1"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                         @endforeach
