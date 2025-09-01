@@ -120,76 +120,59 @@
                 <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
                     <div class="row">
-                        @foreach ($verticales as $item)
-                        <div class="col-md-6 col-xl-3">
-                            <a class="block block-rounded" href="javascript:void(0)">
-                                <div class="block-content pb-8 bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
-                                    <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
-                                </div>
-                                <div class="block-content block-content-full bg-body-light">
-                                    <div class="d-flex justify-content-center gap-2">
-                                        <a 
-                                            role="button"
-                                            class="btn btn-sm btn-primary"
-                                            data-id="{{ $item->id }}"
-                                            data-link="{{ $item->link }}"
-                                            data-position="{{ $item->position }}"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#edit-banner"
-                                            onclick="openEditbannerModal(this)"
-                                        >
-                                            <i class="si si-note me-1"></i>
-                                        </a>
-                                    
-                                        <form action="{{ route('banners.destroy', $item->id) }}" method="post"
-                                            onsubmit="return confirm('@lang('locale.confirm_delete')')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="si si-trash me-1"></i>
-                                            </button>
-                                        </form>
+                        @foreach ($verticales as $item)  
+                            <div class="col-6 col-md-4 col-xxl-2">
+                                <a class="block block-rounded text-center bg-image"
+                                    style="background-image: url('assets/media/photos/photo14.jpg');"
+                                    href="javascript:void(0)">
+                                    <div class="block-content block-content-full bg-modern-op ratio ratio-1x1">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div>
+                                                <i class="far fa-2x fa-envelope-open text-white"></i>
+                                                <div class="fs-sm fw-semibold mt-3 text-uppercase text-white">Messages
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                          </div>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
 
                     @if ($verticales->isNotEmpty())
-                    <div class="d-flex justify-content-center">
-                        <nav aria-label="Projects Search Navigation">
-                            <ul class="pagination pagination-sm">
-                                {{-- Lien "Précédent" --}}
-                                <li class="page-item {{ $verticales->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link"
-                                        href="{{ $verticales->previousPageUrl() ?? 'javascript:void(0)' }}"
-                                        aria-label="Previous">
-                                        <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </a>
-                                </li>
-
-                                {{-- Numéros de pages --}}
-                                @foreach ($verticales->getUrlRange(1, $verticales->lastPage()) as $page => $url)
-                                    <li
-                                        class="page-item {{ $verticales->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        <div class="d-flex justify-content-center">
+                            <nav aria-label="Projects Search Navigation">
+                                <ul class="pagination pagination-sm">
+                                    {{-- Lien "Précédent" --}}
+                                    <li class="page-item {{ $verticales->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $verticales->previousPageUrl() ?? 'javascript:void(0)' }}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </a>
                                     </li>
-                                @endforeach
 
-                                {{-- Lien "Suivant" --}}
-                                <li class="page-item {{ $verticales->hasMorePages() ? '' : 'disabled' }}">
-                                    <a class="page-link"
-                                        href="{{ $verticales->nextPageUrl() ?? 'javascript:void(0)' }}"
-                                        aria-label="Next">
-                                        <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                                    {{-- Numéros de pages --}}
+                                    @foreach ($verticales->getUrlRange(1, $verticales->lastPage()) as $page => $url)
+                                        <li
+                                            class="page-item {{ $verticales->currentPage() == $page ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- Lien "Suivant" --}}
+                                    <li class="page-item {{ $verticales->hasMorePages() ? '' : 'disabled' }}">
+                                        <a class="page-link"
+                                            href="{{ $verticales->nextPageUrl() ?? 'javascript:void(0)' }}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     @endif
                 </div>
             </div>
