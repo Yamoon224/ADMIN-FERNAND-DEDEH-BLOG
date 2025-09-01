@@ -126,34 +126,29 @@
                                 <div class="block-content pb-8 bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
                                     <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
                                 </div>
-                                <div class="block-content text-center">
-                                    <p class="fs-sm fw-medium text-muted">{{ $item->link }}</p>
-                                </div>
                                 <div class="block-content block-content-full bg-body-light">
-                                    <div class="row g-0 fs-sm text-center">
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <a 
-                                                role="button"
-                                                class="btn btn-sm btn-primary"
-                                                data-id="{{ $item->id }}"
-                                                data-link="{{ $item->link }}"
-                                                data-position="{{ $item->position }}"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#edit-banner"
-                                                onclick="openEditbannerModal(this)"
-                                            >
-                                                <i class="si si-note me-1"></i>
-                                            </a>
-                                        
-                                            <form action="{{ route('banners.destroy', $item->id) }}" method="post"
-                                                onsubmit="return confirm('@lang('locale.confirm_delete')')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-sm btn-danger">
-                                                    <i class="si si-trash me-1"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a 
+                                            role="button"
+                                            class="btn btn-sm btn-primary"
+                                            data-id="{{ $item->id }}"
+                                            data-link="{{ $item->link }}"
+                                            data-position="{{ $item->position }}"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#edit-banner"
+                                            onclick="openEditbannerModal(this)"
+                                        >
+                                            <i class="si si-note me-1"></i>
+                                        </a>
+                                    
+                                        <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                            onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="si si-trash me-1"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </a>
