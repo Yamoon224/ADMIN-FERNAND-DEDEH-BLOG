@@ -123,7 +123,7 @@
                         @foreach ($verticales as $item)  
                             <div class="col-6 col-md-4 col-xxl-2">
                                 <a class="block block-rounded text-center bg-image"
-                                    style="background-image: url('assets/media/photos/photo14.jpg');"
+                                    style="background-image: url('{{ asset($item->image_path) }}');"
                                     href="javascript:void(0)">
                                     <div class="block-content block-content-full bg-modern-op ratio ratio-1x1">
                                         <div class="d-flex justify-content-center align-items-center">
@@ -151,6 +151,7 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="fs-sm fw-semibold mt-3 text-uppercase text-white">{{ $item->position }}</div>
                                     </div>
                                 </a>
                             </div>
