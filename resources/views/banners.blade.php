@@ -123,7 +123,7 @@
                         @foreach ($verticales as $item)
                         <div class="col-md-6 col-xl-3">
                             <a class="block block-rounded" href="javascript:void(0)">
-                                <div class="block-content pb-2 bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
+                                <div class="block-content pb-8 bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
                                     <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
                                 </div>
                                 <div class="block-content block-content-full bg-body-light">
