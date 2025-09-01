@@ -119,7 +119,7 @@
                 </div>
                 <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
-                    <div class="row">
+                    <div class="row mb-2">
                         @foreach ($verticales as $item)  
                         <div class="col-md-6 col-xl-4">
                             <!-- Bloc image + texte centré -->
@@ -134,7 +134,7 @@
                             </a>
                         
                             <!-- Footer avec boutons, en dehors du <a> -->
-                            <div class="block-content block-content-full d-flex justify-content-center gap-2 mt-2">
+                            <div class="block-content block-content-full d-flex justify-content-center gap-2 mb-2">
                                 <a role="button" class="btn btn-sm btn-primary"
                                    data-id="{{ $item->id }}"
                                    data-link="{{ $item->link }}"
