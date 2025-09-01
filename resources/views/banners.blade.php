@@ -121,40 +121,40 @@
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
                     <div class="row">
                         @foreach ($verticales as $item)  
-                            <div class="col-6 col-md-4 col-xxl-2">
-                                <a class="block block-rounded text-center bg-image"
-                                    style="background-image: url('{{ asset($item->image_path) }}');"
-                                    href="javascript:void(0)">
-                                    <div class="block-content block-content-full bg-modern-op ratio ratio-1x1">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <a 
-                                                    role="button"
-                                                    class="btn btn-sm btn-primary"
-                                                    data-id="{{ $item->id }}"
-                                                    data-link="{{ $item->link }}"
-                                                    data-position="{{ $item->position }}"
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#edit-banner"
-                                                    onclick="openEditbannerModal(this)"
-                                                >
-                                                    <i class="si si-note me-1"></i>
-                                                </a>
-                                            
-                                                <form action="{{ route('banners.destroy', $item->id) }}" method="post"
-                                                    onsubmit="return confirm('@lang('locale.confirm_delete')')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger">
-                                                        <i class="si si-trash me-1"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="fs-sm fw-semibold mt-3 text-uppercase text-white">{{ $item->position }}</div>
-                                    </div>
+                        <div class="col-md-6 col-xl-4">
+                            <!-- Bloc image + texte centré -->
+                            <a class="block block-rounded text-center bg-image h-100 mb-0"
+                               style="background-image: url('{{ asset($item->image_path) }}');"
+                               href="javascript:void(0)">
+                                <div class="block-content block-content-full d-flex justify-content-center align-items-center ratio ratio-1x1">
+                                    <div class="fs-lg fw-bold text-white">   
+                                        {{ $item->position }}
+                                    </div>   
+                                </div>
+                            </a>
+                        
+                            <!-- Footer avec boutons, en dehors du <a> -->
+                            <div class="block-content block-content-full d-flex justify-content-center gap-2 mt-2">
+                                <a role="button" class="btn btn-sm btn-primary"
+                                   data-id="{{ $item->id }}"
+                                   data-link="{{ $item->link }}"
+                                   data-position="{{ $item->position }}"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#edit-banner"
+                                   onclick="openEditbannerModal(this)">
+                                    <i class="si si-note me-1"></i>
                                 </a>
+                        
+                                <form action="{{ route('banners.destroy', $item->id) }}" method="post"
+                                      onsubmit="return confirm('@lang('locale.confirm_delete')')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">
+                                        <i class="si si-trash me-1"></i>
+                                    </button>
+                                </form>
                             </div>
+                        </div>
                         @endforeach
                     </div>
 
