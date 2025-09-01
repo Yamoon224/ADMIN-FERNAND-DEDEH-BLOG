@@ -121,20 +121,17 @@
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
                     <div class="row">
                         @foreach ($verticales as $item)
-                        <div class="col-md-6 col-xl-4">
-                            <a class="block block-rounded bg-image h-100 mb-0"
-                               style="background-image: url('{{ asset($item->image_path) }}');"
-                               href="javascript:void(0)">
-                                <div class="block-content bg-black-50">
-                                    <div class="mb-5 mb-sm-7 d-sm-flex justify-content-sm-between align-items-sm-center">
-                                        
-                                        <!-- Badge à gauche -->
-                                        <p class="mb-0">
-                                            <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
-                                        </p>
-                        
-                                        <!-- Boutons à droite -->
-                                        <div class="d-flex align-items-center gap-2">
+                        <div class="col-md-6 col-xl-3">
+                            <a class="block block-rounded" href="javascript:void(0)">
+                                <div class="block-content pb-8 bg-image" style="background-image: url('{{ asset($item->image_path) }}');">
+                                    <span class="badge bg-primary fw-bold p-2 text-uppercase">{{ $item->position }}</span>
+                                </div>
+                                <div class="block-content text-center">
+                                    <p class="fs-sm fw-medium text-muted">{{ $item->link }}</p>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <div class="row g-0 fs-sm text-center">
+                                        <div class="d-flex justify-content-center gap-2">
                                             <a 
                                                 role="button"
                                                 class="btn btn-sm btn-primary"
@@ -147,7 +144,7 @@
                                             >
                                                 <i class="si si-note me-1"></i>
                                             </a>
-                        
+                                        
                                             <form action="{{ route('banners.destroy', $item->id) }}" method="post"
                                                 onsubmit="return confirm('@lang('locale.confirm_delete')')">
                                                 @csrf
@@ -157,16 +154,10 @@
                                                 </button>
                                             </form>
                                         </div>
-                        
                                     </div>
-                        
-                                    <p class="fs-lg fw-bold text-white mb-0">
-                                        Exploring the forest in the mist
-                                    </p>
-                                    <p class="fw-medium text-white-75">{{ $item->link }}</p>
                                 </div>
                             </a>
-                        </div>
+                          </div>
                         @endforeach
                     </div>
 
