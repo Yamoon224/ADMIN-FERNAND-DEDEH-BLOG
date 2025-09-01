@@ -118,7 +118,7 @@
                 </div>
                 <div class="tab-pane fade fade-up" id="sidebar_banners" role="tabpanel"
                     aria-labelledby="sidebar_banners-tab" tabindex="0">
-                    <div class="row">
+                    <div class="row items-push">
                         @foreach ($verticales as $item)
                         {{-- <div class="row items-push"> --}}
                             <div class="col-md-6 col-xl-4">
