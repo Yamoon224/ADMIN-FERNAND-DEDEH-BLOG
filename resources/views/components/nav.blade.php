@@ -144,6 +144,7 @@
                         <span class="nav-main-link-name">@lang('locale.comment', ['suffix'=>'s'])</span>
                     </a>
                 </li>
+                <li class="nav-main-heading">@lang('locale.management')</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="be_forms_layouts.html#">
                         <i class="nav-main-link-icon si si-energy"></i>
@@ -172,22 +173,29 @@
                         @endif     
                     </ul>
                 </li>
-                                
-                @if (isauthorized([1]))
-                <li class="nav-main-heading">@lang('locale.user_management')</li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link  {{ Route::is('groups.*') ? 'active' : '' }}" href="{{ route('groups.index') }}">
-                        <i class="nav-main-link-icon si si-people"></i>
-                        <span class="nav-main-link-name">@lang('locale.group', ['suffix'=>'s'])</span>
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="be_forms_layouts.html#">
+                        <i class="nav-main-link-icon si si-energy"></i>
+                        <span class="nav-main-link-name">@lang('locale.settings')</span>
                     </a>
-                </li>    
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                        <i class="nav-main-link-icon si si-user"></i>
-                        <span class="nav-main-link-name">@lang('locale.user', ['suffix'=>'s'])</span>
-                    </a>
-                </li>                    
-                @endif
+                    <ul class="nav-main-submenu">
+                        @if (isauthorized([1]))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link  {{ Route::is('groups.*') ? 'active' : '' }}" href="{{ route('groups.index') }}">
+                                <i class="nav-main-link-icon si si-people"></i>
+                                <span class="nav-main-link-name">@lang('locale.group', ['suffix'=>'s'])</span>
+                            </a>
+                        </li>    
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Route::is('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                                <i class="nav-main-link-icon si si-user"></i>
+                                <span class="nav-main-link-name">@lang('locale.user', ['suffix'=>'s'])</span>
+                            </a>
+                        </li>                    
+                        @endif
+                    </ul>
+                </li>                               
+                
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="{{ route('logout') }}">
                         <i class="nav-main-link-icon si si-power"></i>

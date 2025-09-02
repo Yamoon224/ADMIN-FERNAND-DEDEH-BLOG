@@ -36,6 +36,8 @@
         'posting' => 'Diffusions',
         'configurations' => 'Configurations',
         'collect' => 'Collecte',
+        'settings' => 'Paramètres',
+        'management' => 'Gestion',
         'daily_question' => 'Questions du Jour',
         'group' => "Groupe:suffix d'Utilisateur:suffix",
         'user' => "Utilisateur:suffix",

@@ -35,6 +35,8 @@
         'user_management' => 'Users Management',
         'posting' => 'Postings',
         'collect' => 'Collect',
+        'settings' => 'Settings',
+        'management' => 'Management',
         'configurations' => 'Configurations',
         'daily_question' => 'Daily Questions',
         'exclusivity' => "Flash Info:suffix",
