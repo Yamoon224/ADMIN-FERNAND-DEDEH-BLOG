@@ -137,34 +137,41 @@
                     </a>
                 </li>
 
-                <li class="nav-main-heading">@lang('locale.article_management')</li>
+                <li class="nav-main-heading">@lang('locale.collect')</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('comments.*') ? 'active' : '' }}" href="{{ route('comments.index') }}">
                         <i class="nav-main-link-icon si si-bubbles"></i>
                         <span class="nav-main-link-name">@lang('locale.comment', ['suffix'=>'s'])</span>
                     </a>
                 </li>
-
                 <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('hashtags.*') ? 'active' : '' }}" href="{{ route('hashtags.index') }}">
-                        <i class="nav-main-link-icon si si-tag"></i>
-                        <span class="nav-main-link-name">@lang('locale.hashtag', ['suffix'=>'s'])</span>
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="be_forms_layouts.html#">
+                        <i class="nav-main-link-icon si si-energy"></i>
+                        <span class="nav-main-link-name">@lang('locale.configurations')</span>
                     </a>
-                </li>                
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('categories.*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
-                        <i class="nav-main-link-icon si si-tag"></i>
-                        <span class="nav-main-link-name">@lang('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
-                    </a>
-                </li>  
-                @if (isauthorized([1]))
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('banners.*') ? 'active' : '' }}" href="{{ route('banners.index') }}">
-                        <i class="nav-main-link-icon si si-picture"></i>
-                        <span class="nav-main-link-name">@lang('locale.banner', ['suffix'=>'s'])</span>
-                    </a>
-                </li> 
-                @endif     
+                    <ul class="nav-main-submenu">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Route::is('hashtags.*') ? 'active' : '' }}" href="{{ route('hashtags.index') }}">
+                                <i class="nav-main-link-icon si si-tag"></i>
+                                <span class="nav-main-link-name">@lang('locale.hashtag', ['suffix'=>'s'])</span>
+                            </a>
+                        </li>                
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Route::is('categories.*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+                                <i class="nav-main-link-icon si si-tag"></i>
+                                <span class="nav-main-link-name">@lang('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
+                            </a>
+                        </li>  
+                        @if (isauthorized([1]))
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ Route::is('banners.*') ? 'active' : '' }}" href="{{ route('banners.index') }}">
+                                <i class="nav-main-link-icon si si-picture"></i>
+                                <span class="nav-main-link-name">@lang('locale.banner', ['suffix'=>'s'])</span>
+                            </a>
+                        </li> 
+                        @endif     
+                    </ul>
+                </li>
                                 
                 @if (isauthorized([1]))
                 <li class="nav-main-heading">@lang('locale.user_management')</li>

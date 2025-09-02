@@ -33,7 +33,9 @@
         'description' => 'Description',
 
         'user_management' => 'Users Management',
-        'posting' => 'Posting',
+        'posting' => 'Postings',
+        'collect' => 'Collect',
+        'configurations' => 'Configurations',
         'daily_question' => 'Daily Questions',
         'exclusivity' => "Flash Info:suffix",
         'group' => 'Users Group:suffix',

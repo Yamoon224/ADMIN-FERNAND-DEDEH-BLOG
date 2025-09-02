@@ -33,7 +33,9 @@
         'description' => 'Description',
 
         'user_management' => 'Gestion des utilisateurs',
-        'posting' => 'Diffusion',
+        'posting' => 'Diffusions',
+        'configurations' => 'Configurations',
+        'collect' => 'Collecte',
         'daily_question' => 'Questions du Jour',
         'group' => "Groupe:suffix d'Utilisateur:suffix",
         'user' => "Utilisateur:suffix",
