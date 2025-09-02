@@ -23,7 +23,7 @@
     </div>
     <div class="bg-body-dark">
         <div class="content content-full">
-            <div class="my-3 text-center">
+            <div class="my-2 text-center">
                 <h3 class="fw-bold mb-2">Une idée qui te trotte dans la tête ?</h3>
                 <h4 class="h5 fw-medium opacity-75">
                     Envie de la partager ou de t’exprimer à travers un blog ? Clique sur le bouton ci-dessous et contribue à notre communauté de lecteurs passionnés !
