@@ -23,8 +23,8 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="{{ route('articles.index') }}">
-                            <span>@lang('locale.view_all', ['param'=>__('locale.article', ['suffix'=>'s'])])</span>
+                            href="{{ route('dailies.index') }}">
+                            <span>@lang('locale.view_all', ['param'=>__('locale.daily', ['suffix'=>'s'])])</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
                     </div>
@@ -76,7 +76,7 @@
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">{{ $exclusivitys }}</dt>
+                            <dt class="fs-3 fw-bold">{{ $exclusivities }}</dt>
                             <dd class="fs-sm fw-medium text-muted mb-0">@lang('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="{{ route('categories.index') }}">
+                            href="{{ route('exclusivities.index') }}">
                             <span>@lang('locale.view_all', ['param'=>__('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])])</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="{{ route('banners.index') }}">
+                            href="{{ route('questions.index') }}">
                             <span>@lang('locale.view_all', ['param'=>__('locale.question', ['suffix'=>'s'])])</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
