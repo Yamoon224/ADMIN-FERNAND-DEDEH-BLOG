@@ -76,8 +76,8 @@
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">{{ $categories }}</dt>
-                            <dd class="fs-sm fw-medium text-muted mb-0">@lang('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</dd>
+                            <dt class="fs-3 fw-bold">{{ $exclusivitys }}</dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">@lang('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
                             <i class="si si-tag fs-3 text-primary"></i> <!-- Categories -->
@@ -86,7 +86,7 @@
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
                             href="{{ route('categories.index') }}">
-                            <span>@lang('locale.view_all', ['param'=>__('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])])</span>
+                            <span>@lang('locale.view_all', ['param'=>__('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])])</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
                     </div>
@@ -96,8 +96,8 @@
                 <div class="block block-rounded d-flex flex-column h-100 mb-0">
                     <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">{{ $banners }}</dt>
-                            <dd class="fs-sm fw-medium text-muted mb-0">@lang('locale.banner', ['suffix'=>'s'])</dd>
+                            <dt class="fs-3 fw-bold">{{ $questions }}</dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">@lang('locale.question', ['suffix'=>'s'])</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
                             <i class="si si-picture fs-3 text-primary"></i> <!-- Banners -->
@@ -106,7 +106,7 @@
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
                             href="{{ route('banners.index') }}">
-                            <span>@lang('locale.view_all', ['param'=>__('locale.banner', ['suffix'=>'s'])])</span>
+                            <span>@lang('locale.view_all', ['param'=>__('locale.question', ['suffix'=>'s'])])</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
                     </div>
