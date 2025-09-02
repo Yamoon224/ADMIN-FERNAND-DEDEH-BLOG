@@ -104,7 +104,7 @@
                         <span class="nav-main-link-name">@lang('locale.dashboard')</span>
                     </a>
                 </li>
-                <li class="nav-main-heading">@lang('locale.article_management')</li>
+                <li class="nav-main-heading">@lang('locale.posting')</li>
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('dailies.*') ? 'active' : '' }}" href="{{ route('dailies.index') }}">
                         <i class="nav-main-link-icon si si-docs"></i>
@@ -136,20 +136,27 @@
                         <span class="nav-main-link-name">@lang('locale.podcast', ['suffix'=>'s'])</span>
                     </a>
                 </li>
+
+                <li class="nav-main-heading">@lang('locale.article_management')</li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('comments.*') ? 'active' : '' }}" href="{{ route('comments.index') }}">
+                        <i class="nav-main-link-icon si si-bubbles"></i>
+                        <span class="nav-main-link-name">@lang('locale.comment', ['suffix'=>'s'])</span>
+                    </a>
+                </li>
+
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('hashtags.*') ? 'active' : '' }}" href="{{ route('hashtags.index') }}">
                         <i class="nav-main-link-icon si si-tag"></i>
                         <span class="nav-main-link-name">@lang('locale.hashtag', ['suffix'=>'s'])</span>
                     </a>
-                </li>
-                
+                </li>                
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('categories.*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
                         <i class="nav-main-link-icon si si-tag"></i>
                         <span class="nav-main-link-name">@lang('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
                     </a>
                 </li>  
-
                 @if (isauthorized([1]))
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('banners.*') ? 'active' : '' }}" href="{{ route('banners.index') }}">
@@ -157,23 +164,8 @@
                         <span class="nav-main-link-name">@lang('locale.banner', ['suffix'=>'s'])</span>
                     </a>
                 </li> 
-                @endif
-
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('comments.*') ? 'active' : '' }}" href="{{ route('comments.index') }}">
-                        <i class="nav-main-link-icon si si-bubbles"></i>
-                        <span class="nav-main-link-name">@lang('locale.comment', ['suffix'=>'s'])</span>
-                    </a>
-                </li>
-                
-                
-                
-                
-
-                                             
-                
-                
-                
+                @endif     
+                                
                 @if (isauthorized([1]))
                 <li class="nav-main-heading">@lang('locale.user_management')</li>
                 <li class="nav-main-item">

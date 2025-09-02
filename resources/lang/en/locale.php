@@ -33,7 +33,7 @@
         'description' => 'Description',
 
         'user_management' => 'Users Management',
-        'article_management' => 'Posts Management',
+        'posting' => 'Posting',
         'daily_question' => 'Daily Questions',
         'exclusivity' => "Flash Info:suffix",
         'group' => 'Users Group:suffix',
