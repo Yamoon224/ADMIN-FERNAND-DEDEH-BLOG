@@ -38,7 +38,7 @@
         'exclusivity' => "Flash Info:suffix",
         'group' => 'Users Group:suffix',
         'user' => 'User:suffix',
-        'daily' => "A Berthelemy Inabo",
+        'daily' => "A Barthelemy Inabo",
         // 'daily' => "Daily Post:suffix",
         'category' => "Post Categor:suffix",
         'article' => "Post:suffix",

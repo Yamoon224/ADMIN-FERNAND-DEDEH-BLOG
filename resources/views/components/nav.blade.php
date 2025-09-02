@@ -106,6 +106,19 @@
                 </li>
                 <li class="nav-main-heading">@lang('locale.article_management')</li>
                 <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('dailies.*') ? 'active' : '' }}" href="{{ route('dailies.index') }}">
+                        <i class="nav-main-link-icon si si-docs"></i>
+                        <span class="nav-main-link-name">@lang('locale.daily', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
+                    </a>
+                </li> 
+                <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('exclusivities.*') ? 'active' : '' }}" href="{{ route('exclusivities.index') }}">
+                        <i class="nav-main-link-icon si si-flag"></i>
+                        <span class="nav-main-link-name">@lang('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
+                    </a>
+                </li> 
+                
+                <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('categories.*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
                         <i class="nav-main-link-icon si si-tag"></i>
                         <span class="nav-main-link-name">@lang('locale.category', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
@@ -147,21 +160,7 @@
                         <i class="nav-main-link-icon si si-docs"></i>
                         <span class="nav-main-link-name">@lang('locale.article', ['suffix'=>'s'])</span>
                     </a>
-                </li> 
-
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('dailies.*') ? 'active' : '' }}" href="{{ route('dailies.index') }}">
-                        <i class="nav-main-link-icon si si-docs"></i>
-                        <span class="nav-main-link-name">@lang('locale.daily', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
-                    </a>
-                </li> 
-                
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('exclusivities.*') ? 'active' : '' }}" href="{{ route('exclusivities.index') }}">
-                        <i class="nav-main-link-icon si si-flag"></i>
-                        <span class="nav-main-link-name">@lang('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
-                    </a>
-                </li> 
+                </li>                              
                 
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('podcasts.index') ? 'active' : '' }}" href="{{ route('podcasts.index') }}">
