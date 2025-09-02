@@ -112,11 +112,36 @@
                     </a>
                 </li> 
                 <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">
+                        <i class="nav-main-link-icon si si-docs"></i>
+                        <span class="nav-main-link-name">@lang('locale.article', ['suffix'=>'s'])</span>
+                    </a>
+                </li> 
+                <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('exclusivities.*') ? 'active' : '' }}" href="{{ route('exclusivities.index') }}">
                         <i class="nav-main-link-icon si si-flag"></i>
                         <span class="nav-main-link-name">@lang('locale.exclusivity', ['suffix'=>app()->getLocale() == 'en' ? 'ies' : 's'])</span>
                     </a>
                 </li> 
+                <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('questions.*') ? 'active' : '' }}" href="{{ route('questions.index') }}">
+                        <i class="nav-main-link-icon si si-info"></i>
+                        <span class="nav-main-link-name">@lang('locale.question', ['suffix'=>'s'])</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('podcasts.index') ? 'active' : '' }}" href="{{ route('podcasts.index') }}">
+                        <!-- Remplacer l'icône par un micro ou podcast -->
+                        <i class="nav-main-link-icon si si-microphone"></i>
+                        <span class="nav-main-link-name">@lang('locale.podcast', ['suffix'=>'s'])</span>
+                    </a>
+                </li>
+                <li class="nav-main-item">
+                    <a class="nav-main-link {{ Route::is('hashtags.*') ? 'active' : '' }}" href="{{ route('hashtags.index') }}">
+                        <i class="nav-main-link-icon si si-tag"></i>
+                        <span class="nav-main-link-name">@lang('locale.hashtag', ['suffix'=>'s'])</span>
+                    </a>
+                </li>
                 
                 <li class="nav-main-item">
                     <a class="nav-main-link {{ Route::is('categories.*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
@@ -141,34 +166,13 @@
                     </a>
                 </li>
                 
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('hashtags.*') ? 'active' : '' }}" href="{{ route('hashtags.index') }}">
-                        <i class="nav-main-link-icon si si-tag"></i>
-                        <span class="nav-main-link-name">@lang('locale.hashtag', ['suffix'=>'s'])</span>
-                    </a>
-                </li>
                 
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('questions.*') ? 'active' : '' }}" href="{{ route('questions.index') }}">
-                        <i class="nav-main-link-icon si si-info"></i>
-                        <span class="nav-main-link-name">@lang('locale.question', ['suffix'=>'s'])</span>
-                    </a>
-                </li>
+                
+                
 
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">
-                        <i class="nav-main-link-icon si si-docs"></i>
-                        <span class="nav-main-link-name">@lang('locale.article', ['suffix'=>'s'])</span>
-                    </a>
-                </li>                              
+                                             
                 
-                <li class="nav-main-item">
-                    <a class="nav-main-link {{ Route::is('podcasts.index') ? 'active' : '' }}" href="{{ route('podcasts.index') }}">
-                        <!-- Remplacer l'icône par un micro ou podcast -->
-                        <i class="nav-main-link-icon si si-microphone"></i>
-                        <span class="nav-main-link-name">@lang('locale.podcast', ['suffix'=>'s'])</span>
-                    </a>
-                </li>
+                
                 
                 @if (isauthorized([1]))
                 <li class="nav-main-heading">@lang('locale.user_management')</li>
