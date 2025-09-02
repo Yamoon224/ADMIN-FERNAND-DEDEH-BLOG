@@ -38,7 +38,7 @@
         'group' => "Groupe:suffix d'Utilisateur:suffix",
         'user' => "Utilisateur:suffix",
         'category' => "Catégorie:suffix Article",
-        'daily' => "Article:suffix Quotidien",
+        'daily' => "A Berthelemy Inabo",
         'exclusivity' => "Info:suffix Flash",
         'article' => "Article:suffix",
         'banner' => "Bannière:suffix",
