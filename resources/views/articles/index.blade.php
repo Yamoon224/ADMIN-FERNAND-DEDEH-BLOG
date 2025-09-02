@@ -21,6 +21,17 @@
             </div>
         </div>
     </div>
+    <div class="bg-body-dark">
+        <div class="content content-full">
+            <div class="my-5 text-center">
+                <h3 class="fw-bold mb-2">Une idée qui te trotte dans la tête ?</h3>
+                <h4 class="h5 fw-medium opacity-75">
+                    Envie de la partager ou de t’exprimer à travers un blog ? Clique sur le bouton ci-dessous et contribue à notre communauté de lecteurs passionnés !
+                </h4>
+                <a class="btn btn-primary px-4 py-2" href="{{ route('articles.create') }}">Commenter maintenant</a>
+            </div>
+        </div>
+    </div>
     <div class="content">
         <div class="row items-push">
             <div class="col-xxl-8">
@@ -101,16 +112,5 @@
                 @endif              
             </div>
         </div>
-    </div>
-    <div class="bg-body-dark">
-        <div class="content content-full">
-            <div class="my-5 text-center">
-                <h3 class="fw-bold mb-2">Une idée qui te trotte dans la tête ?</h3>
-                <h4 class="h5 fw-medium opacity-75">
-                    Envie de la partager ou de t’exprimer à travers un blog ? Clique sur le bouton ci-dessous et contribue à notre communauté de lecteurs passionnés !
-                </h4>
-                <a class="btn btn-primary px-4 py-2" href="{{ route('articles.create') }}">Commenter maintenant</a>
-            </div>
-        </div>
-    </div>
+    </div>    
 </x-app-layout>
