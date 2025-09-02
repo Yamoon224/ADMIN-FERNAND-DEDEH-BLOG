@@ -37,7 +37,7 @@
         'configurations' => 'Configurations',
         'collect' => 'Collecte',
         'settings' => 'Paramètres',
-        'management' => 'Gestion',
+        'management' => 'Administration',
         'daily_question' => 'Questions du Jour',
         'group' => "Groupe:suffix d'Utilisateur:suffix",
         'user' => "Utilisateur:suffix",
