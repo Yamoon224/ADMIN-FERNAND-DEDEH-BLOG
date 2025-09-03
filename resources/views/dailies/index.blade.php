@@ -61,16 +61,16 @@
                                         <i class="si si-trash"></i>
                                     </button>
                                 </form>
-                        
+                                @php( $url = env('PUBLIC_HOSTNAME_ARTICLE').'/dailies//'.$item->id )
                                 <!-- Copy Link -->
                                 <button type="button" class="btn btn-secondary btn-sm" 
-                                        onclick="navigator.clipboard.writeText('{{ env('PUBLIC_HOSTNAME_ARTICLE').'/dailies/'.$item->id }}'); alert('@lang('locale.link_copied')');"
+                                        onclick="navigator.clipboard.writeText('{{ $url }}'); alert('@lang('locale.link_copied')');"
                                         title="@lang('locale.copy_link')">
                                     <i class="si si-link"></i>
                                 </button>
                         
                                 <!-- Share Facebook -->
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(env('PUBLIC_HOSTNAME_ARTICLE').'/dailies/'.$item->id)) }}" 
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" 
                                    target="_blank" class="btn btn-info btn-sm" title="@lang('locale.share_facebook')">
                                     <i class="si si-social-facebook"></i>
                                 </a>
