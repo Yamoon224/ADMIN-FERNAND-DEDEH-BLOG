@@ -69,7 +69,6 @@
                                     <h3 class="block-title">@lang('locale.content', ['suffix'=>''])</h3>
                                 </div>
                                 <div class="block-content block-content-full">
-
                                     @foreach($daily->contents as $index => $content)
                                         <div class="hashtag-row" data-index="{{ $index }}" data-existing="true" data-content-id="{{ $content->id }}">
                                             <div class="row align-items-start border-bottom border-warning mb-4 p-4" style="border-bottom-width:2px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0.5rem;">
@@ -114,6 +113,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="content_id[{{ $index }}]" value="{{ $content->id }}">
                                         </div>
                                     @endforeach
 
