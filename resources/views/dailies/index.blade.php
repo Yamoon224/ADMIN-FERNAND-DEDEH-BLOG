@@ -61,7 +61,7 @@
                                         <i class="si si-trash"></i>
                                     </button>
                                 </form>
-                                @php( $url = env('PUBLIC_HOSTNAME_ARTICLE').'/dailies//'.$item->id )
+                                @php $url = env('PUBLIC_HOSTNAME_ARTICLE') . '/dailies/' . $item->id; @endphp
                                 <!-- Copy Link -->
                                 <button type="button" class="btn btn-secondary btn-sm" 
                                         onclick="navigator.clipboard.writeText('{{ $url }}'); alert('@lang('locale.link_copied')');"
