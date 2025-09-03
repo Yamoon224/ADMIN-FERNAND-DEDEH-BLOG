@@ -146,8 +146,8 @@
                 </li>
                 <li class="nav-main-heading">@lang('locale.management')</li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="be_forms_layouts.html#">
-                        <i class="nav-main-link-icon si si-tools"></i>
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false">
+                        <i class="nav-main-link-icon si si-settings"></i>
                         <span class="nav-main-link-name">@lang('locale.configurations')</span>
                     </a>
                     <ul class="nav-main-submenu">
@@ -174,7 +174,7 @@
                     </ul>
                 </li>
                 <li class="nav-main-item">
-                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="be_forms_layouts.html#">
+                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false">
                         <i class="nav-main-link-icon si si-settings"></i>
                         <span class="nav-main-link-name">@lang('locale.settings')</span>
                     </a>
