@@ -85,7 +85,7 @@ class DailyController extends Controller
     {
         $hashtags = $this->hashtagRepository->all();
         $daily = $this->repository->find($id);
-        return view('dailys.edit', compact('hashtags', 'daily'));
+        return view('dailies.edit', compact('hashtags', 'daily'));
     }
 
     public function update(UpdateDailyRequest $request, $id)
