@@ -48,8 +48,9 @@ class UserRepository
     /**
      * Delete a user (soft delete).
      */
-    public function delete(User $user): bool
+    public function delete(string $id): bool
     {
+        $user = User::find($id);
         return $user->delete();
     }
 }

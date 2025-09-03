@@ -6,7 +6,6 @@ use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Repositories\QuestionRepository;
 use App\Http\Resources\QuestionResource;
-use App\Models\Question;
 
 class QuestionController extends Controller
 {
@@ -44,8 +43,7 @@ class QuestionController extends Controller
 
     public function destroy($id)
     {
-        $question = Question::find($id);
-        $this->repository->delete($question);
+        $this->repository->delete($id);
         return redirect()->route('questions.index');
     }
 }

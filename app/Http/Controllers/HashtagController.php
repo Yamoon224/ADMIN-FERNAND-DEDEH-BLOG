@@ -6,7 +6,6 @@ use App\Http\Requests\StoreHashtagRequest;
 use App\Http\Requests\UpdateHashtagRequest;
 use App\Repositories\HashtagRepository;
 use App\Http\Resources\HashtagResource;
-use App\Models\Hashtag;
 
 class HashtagController extends Controller
 {
@@ -44,8 +43,7 @@ class HashtagController extends Controller
 
     public function destroy($id)
     {
-        $hashtag = Hashtag::find($id);
-        $this->repository->delete($hashtag);
+        $this->repository->delete($id);
         return redirect()->route('hashtags.index');
     }
 }

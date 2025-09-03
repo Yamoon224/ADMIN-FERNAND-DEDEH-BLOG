@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDailyRequest;
 use App\Http\Requests\UpdateDailyRequest;
 use App\Repositories\DailyRepository;
-use App\Http\Resources\DailyResource;
 use App\Repositories\ContentRepository;
 use App\Repositories\HashtagRepository;
 

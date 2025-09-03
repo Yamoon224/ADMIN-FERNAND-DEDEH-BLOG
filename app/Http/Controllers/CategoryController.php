@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Repositories\CategoryRepository;
 use App\Http\Resources\CategoryResource;
-use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -44,8 +43,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $this->repository->delete($category);
+        $this->repository->delete($id);
         return redirect()->route('categories.index');
     }
 }

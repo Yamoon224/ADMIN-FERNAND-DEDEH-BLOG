@@ -6,7 +6,6 @@ use App\Http\Requests\StoreExclusivityRequest;
 use App\Http\Requests\UpdateExclusivityRequest;
 use App\Repositories\ExclusivityRepository;
 use App\Http\Resources\ExclusivityResource;
-use App\Models\Exclusivity;
 
 class ExclusivityController extends Controller
 {
@@ -44,8 +43,7 @@ class ExclusivityController extends Controller
 
     public function destroy($id)
     {
-        $exclusivity = Exclusivity::find($id);
-        $this->repository->delete($exclusivity);
+        $this->repository->delete($id);
         return redirect()->route('exclusivities.index');
     }
 }

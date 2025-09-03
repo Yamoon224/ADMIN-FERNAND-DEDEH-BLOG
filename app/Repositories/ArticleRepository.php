@@ -46,8 +46,9 @@ class ArticleRepository
         return $article;
     }
 
-    public function delete(Article $article): bool
+    public function delete(string $id): bool
     {
+        $article = Article::find($id);
         return $article->delete();
     }
 }

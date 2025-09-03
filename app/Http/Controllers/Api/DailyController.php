@@ -57,7 +57,11 @@ class DailyController extends Controller
      */
     public function index()
     {
-        return DailyResource::collection($this->repository->all(['user', 'contents.hashtag']));
+        return DailyResource::collection(
+            $this->repository->all(['user', 'contents.hashtag'], [
+                ['published_at', '<=', now()]
+            ])
+        );
     }
 
     public function store(StoreDailyRequest $request)
