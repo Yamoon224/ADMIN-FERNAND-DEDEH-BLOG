@@ -3,7 +3,7 @@
         <div class="content">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
                 <div class="flex-grow-1">
-                    <h1 class="h3 fw-bold mb-1">@lang('locale.article_details')</h1>
+                    <h1 class="h3 fw-bold mb-1">@lang('locale.posting')</h1>
                 </div>
                 <nav class="flex-shrink-0 mt-1 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">

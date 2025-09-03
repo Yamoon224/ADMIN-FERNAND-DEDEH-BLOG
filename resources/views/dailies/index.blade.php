@@ -8,7 +8,7 @@
                 <nav class="flex-shrink-0 mt-1 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="javascript:void(0)">@lang('locale.article_management')</a>
+                            <a class="link-fx" href="javascript:void(0)">@lang('locale.posting')</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">@lang('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'ies' : 's'])</li>
                     </ol>
@@ -31,14 +31,36 @@
                     @foreach ($dailies as $item)
                     <div class="col-12 border-bottom border-warning mb-4" style="border-bottom-width:2px;">
                         <h4 class="h5 mb-1">
-                            <a href="{{ route('dailies.show', $item->id) }}" title="@lang('locale.show', ['param'=>__('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'y' : '']).' #'.$item->id])">
+                            <a href="{{ route('dailies.show', $item->id) }}" 
+                               title="@lang('locale.show', ['param'=>__('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'y' : '']).' #'.$item->id])">
                                 @lang('locale.daily', ['suffix' => app()->getLocale() == 'en' ? 'y' : '']) #{{ $item->id }}
                             </a>
                         </h4>
-                        <div class="fs-sm fw-medium text-success mb-1">
-                            @lang('locale.published_at') {{ $item->published_at->format('d/m/Y H:i') }} | 
-                            @lang('locale.created_by'): {{ $item->user->name }}
+                    
+                        <!-- Ligne infos + actions -->
+                        <div class="d-flex justify-content-between align-items-center fs-sm fw-medium text-success mb-1">
+                            <div>
+                                @lang('locale.published_at') {{ $item->published_at->format('d/m/Y H:i') }} | 
+                                @lang('locale.created_by'): {{ $item->user->name }}
+                            </div>
+                    
+                            <!-- Boutons alignés -->
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+                                <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary" 
+                                   title="@lang('locale.edit', ['param'=>''])">
+                                    <i class="si si-pencil"></i>
+                                </a>
+                                <form action="{{ route('dailies.destroy', $item->id) }}" method="POST" 
+                                      onsubmit="return confirm('@lang('locale.confirm_delete')');" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" title="@lang('locale.delete')">
+                                        <i class="si si-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
+                    
                         <p class="fs-sm text-muted" style="text-align: justify">
                             {{ Str::limit($item->introduction, 700, '...') }}
                         </p>
