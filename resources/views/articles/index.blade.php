@@ -23,7 +23,7 @@
     </div>
     <div class="bg-body-dark">
         <div class="content content-full">
-            <div class="my-2 text-center">
+            <div class="text-center">
                 <h3 class="fw-bold mb-2">Une idée qui te trotte dans la tête ?</h3>
                 <h4 class="h5 fw-medium opacity-75">
                     Envie de la partager ou de t’exprimer à travers un blog ? Clique sur le bouton ci-dessous et contribue à notre communauté de lecteurs passionnés !
@@ -52,9 +52,12 @@
                                         </h4>
                                         <div class="d-flex ms-2" style="gap: 0.5rem;" role="group" aria-label="Actions">
                                             <!-- Edit button -->
-                                            <a href="{{ route('articles.edit', $item->id) }}" class="btn btn-sm btn-primary" title="@lang('locale.edit', ['param'=>''])">
+                                            <a href="{{ route('articles.edit', $item->id) }}" 
+                                               class="btn btn-sm btn-primary" 
+                                               title="@lang('locale.edit', ['param'=>''])">
                                                 <i class="si si-pencil"></i>
                                             </a>
+                                        
                                             @if (isauthorized([1, 2]))
                                             <!-- Delete button -->
                                             <form action="{{ route('articles.destroy', $item->id) }}" method="POST" onsubmit="return confirm('@lang('locale.confirm_delete')');">
@@ -64,7 +67,23 @@
                                                     <i class="si si-trash"></i>
                                                 </button>
                                             </form>
-                                            @endif                                            
+                                            @endif  
+                                        
+                                            <!-- Copy link button -->
+                                            <button type="button" class="btn btn-sm btn-secondary" 
+                                                    onclick="navigator.clipboard.writeText('{{ env('PUBLIC_HOSTNAME_ARTICLE').'/'.$item->title }}'); 
+                                                             alert('@lang('locale.link_copied')');"
+                                                    title="@lang('locale.copy_link')">
+                                                <i class="si si-link"></i>
+                                            </button>
+                                        
+                                            <!-- Facebook share button -->
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(env('PUBLIC_HOSTNAME_ARTICLE').'/'.$item->title) }}" 
+                                               target="_blank" 
+                                               class="btn btn-sm btn-info" 
+                                               title="@lang('locale.share_facebook')">
+                                                <i class="si si-social-facebook"></i>
+                                            </a>
                                         </div>
                                     </div>
                 

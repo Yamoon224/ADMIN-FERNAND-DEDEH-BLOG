@@ -33,6 +33,9 @@
         'description' => 'Description',
 
         'user_management' => 'Gestion des utilisateurs',
+        'link_copied' => 'Lien Copié',
+        'copy_link' => 'Copier le lien',
+        'share_facebook' => 'Partager Facebook',
         'posting' => 'Diffusions',
         'configurations' => 'Configurations',
         'collect' => 'Collecte',
