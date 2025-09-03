@@ -169,12 +169,13 @@
                 btn.addEventListener('click', function () {
                     const row = btn.closest('.hashtag-row');
                     if (row.dataset.existing === 'true') {
-                        // Pour contenu existant, envoi de l'ID pour suppression côté serveur
+                        // Ajoute l'input hidden AU FORMULAIRE
+                        const form = row.closest('form');
                         const input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = 'deleted_contents[]';
                         input.value = row.dataset.contentId;
-                        row.appendChild(input);
+                        form.appendChild(input);
                     }
                     row.remove();
                 });
