@@ -34,7 +34,7 @@ class DailyController extends Controller
         return view('dailies.add', compact('hashtags'));
     }
 
-    public function store(StoreDailyRequest $request) 
+    public function store(StoreDailyRequest $request)
     {
         // On valide uniquement les champs du daily
         $data = $request->only(['introduction', 'published_at', 'created_by']);
@@ -94,7 +94,21 @@ class DailyController extends Controller
         $data = $request->only(['introduction', 'published_at', 'created_by']);
         $daily = $this->repository->update($id, $data);
 
-        // 2. Gestion des contenus associés
+        // 2. Gestion des contenus à supprimer
+        if ($request->has('deleted_contents')) {
+            foreach ($request->deleted_contents as $contentId) {
+                $existingContent = $this->contentRepository->find($contentId);
+                if ($existingContent) {
+                    // Supprime l'image si elle existe
+                    if ($existingContent->path_image && file_exists(public_path($existingContent->path_image))) {
+                        unlink(public_path($existingContent->path_image));
+                    }
+                    $this->contentRepository->delete($contentId);
+                }
+            }
+        }
+
+        // 3. Gestion des contenus associés (création / mise à jour)
         if ($request->has('body')) {
             foreach ($request->body as $index => $body) {
                 if (!empty($body)) {
@@ -122,7 +136,7 @@ class DailyController extends Controller
                             // Met à jour le contenu
                             $this->contentRepository->update($contentId, [
                                 'body'       => $body,
-                                'path_image' => $path ?? $existingContent->path_image, // utilise la nouvelle image si uploadée
+                                'path_image' => $path ?? $existingContent->path_image,
                                 'hashtag_id' => $request->hashtag_id[$index],
                                 'daily_id'   => $daily->id,
                                 'created_by' => $daily->created_by,
@@ -150,6 +164,7 @@ class DailyController extends Controller
 
         return redirect()->route('dailies.index')->with('message', __('locale.updated_successfully'));
     }
+
 
     public function destroy($id)
     {
