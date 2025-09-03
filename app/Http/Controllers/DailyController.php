@@ -92,7 +92,6 @@ class DailyController extends Controller
     {
         // 1. Mise à jour des champs du Daily
         $data = $request->only(['introduction', 'published_at', 'created_by']);
-        dd($request->all());
         $daily = $this->repository->update($id, $data);
 
         // 2. Gestion des contenus à supprimer
