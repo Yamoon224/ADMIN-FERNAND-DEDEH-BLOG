@@ -25,9 +25,9 @@
         <div class="content content-full">
             <div class="text-center">
                 <h3 class="fw-bold mb-2">Une idée qui te trotte dans la tête ?</h3>
-                <h6 class="h5 fw-medium opacity-75">
+                <P class="text-muted fw-medium opacity-75">
                     Envie de la partager ou de t’exprimer à travers un blog ? Clique sur le bouton ci-dessous et contribue à notre communauté de lecteurs passionnés !
-                </h6>
+                </P>
                 <a class="btn btn-primary px-4 py-2" href="{{ route('articles.create') }}">Commenter maintenant</a>
             </div>
         </div>
