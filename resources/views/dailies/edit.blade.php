@@ -8,7 +8,7 @@
                 <nav class="flex-shrink-0 mt-1 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">
-                            <a class="link-fx" href="javascript:void(0)">@lang('locale.posting')</a>
+                            <a class="link-fx" href="{{ route('dailies.index') }}">@lang('locale.posting')</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">@lang('locale.edit', ['param' => __('locale.daily', ['suffix'=>app()->getLocale() == 'en' ? 'y' : ''])])</li>
                     </ol>
@@ -41,7 +41,9 @@
                         <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label" for="published_at">@lang('locale.published_at') <span class="text-danger">*</span></label>
-                                <input name="published_at" type="datetime-local" id="published_at" class="form-control form-control-alt" value="{{ $daily->published_at->format('Y-m-d\TH:i') }}" required>
+                                <input name="published_at" type="datetime-local" id="published_at" 
+                                       class="form-control form-control-alt" 
+                                       value="{{ $daily->published_at->format('Y-m-d\TH:i') }}" required>
                             </div>
                         </div>
 
@@ -49,7 +51,8 @@
                         <div class="col-12">
                             <div class="mb-4">
                                 <label class="form-label" for="introduction">@lang('locale.introduction') <span class="text-danger">*</span></label>
-                                <textarea name="introduction" id="introduction" cols="30" rows="5" class="form-control form-control-alt" required>{{ $daily->introduction }}</textarea>
+                                <textarea name="introduction" id="introduction" cols="30" rows="5" 
+                                          class="form-control form-control-alt" required>{{ $daily->introduction }}</textarea>
                             </div>
                         </div>
 
@@ -62,11 +65,11 @@
                                 <div class="block-content block-content-full">
                                     @foreach($daily->contents as $index => $content)
                                         <div class="hashtag-row" data-index="{{ $index }}">
-                                            <div class="row">
+                                            <div class="row align-items-start border-bottom border-warning mb-4 p-4" style="border-bottom-width:2px; box-shadow:0 4px 10px rgba(0,0,0,0.1); border-radius:0.5rem;">
                                                 {{-- Hashtag --}}
                                                 <div class="col-lg-6">
                                                     <div class="mb-4">
-                                                        <label class="form-label" for="hashtag_id[{{ $index }}]">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="hashtag_id[{{ $index }}]">@lang('locale.hashtag') <span class="text-danger">*</span></label>
                                                         <select class="form-select" id="hashtag_id[{{ $index }}]" name="hashtag_id[{{ $index }}]" required>
                                                             @foreach ($hashtags as $item)
                                                                 <option value="{{ $item->id }}" {{ $item->id == $content->hashtag_id ? 'selected' : '' }}>
@@ -83,7 +86,7 @@
                                                         <label class="form-label" for="path_image[{{ $index }}]">@lang('locale.hashtag_image')</label>
                                                         <input type="file" class="form-control form-control-alt" id="path_image[{{ $index }}]" name="path_image[{{ $index }}]">
                                                         @if($content->path_image)
-                                                            <img src="{{ asset($content->path_image) }}" alt="image" class="img-fluid rounded mt-1" style="max-height: 120px;">
+                                                            <img src="{{ asset($content->path_image) }}" alt="image" class="img-fluid rounded mt-1" style="max-height:120px;">
                                                         @endif
                                                     </div>
                                                 </div>
@@ -105,7 +108,7 @@
                                         <div class="col-12">
                                             <button type="button" id="addHashtag" class="btn btn-md btn-success">
                                                 <i class="si si-plus me-1"></i>
-                                                @lang('locale.add', ['param'=>__('locale.hashtag', ['suffix'=>''])])
+                                                @lang('locale.add', ['param'=>__('locale.hashtag')])
                                             </button>
                                         </div>
                                     </div>
