@@ -44,9 +44,9 @@
                                 @lang('locale.created_by'): {{ $item->user->name }}
                             </div>
                     
-                            <!-- Boutons alignés -->
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
-                                <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary" 
+                            <!-- Boutons alignés avec btn-xs -->
+                            <div class="btn-group btn-group-xs" role="group" aria-label="Actions">
+                                <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary btn-xs" 
                                    title="@lang('locale.edit', ['param'=>''])">
                                     <i class="si si-pencil"></i>
                                 </a>
@@ -54,7 +54,7 @@
                                       onsubmit="return confirm('@lang('locale.confirm_delete')');" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" title="@lang('locale.delete')">
+                                    <button type="submit" class="btn btn-danger btn-xs" title="@lang('locale.delete')">
                                         <i class="si si-trash"></i>
                                     </button>
                                 </form>
