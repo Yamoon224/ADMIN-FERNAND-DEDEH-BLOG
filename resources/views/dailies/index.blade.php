@@ -43,13 +43,16 @@
                                 @lang('locale.published_at') {{ $item->published_at->format('d/m/Y H:i') }} | 
                                 @lang('locale.created_by'): {{ $item->user->name }}
                             </div>
-                    
-                            <!-- Boutons alignés avec btn-xs -->
-                            <div class="btn-group btn-group-xs" role="group" aria-label="Actions">
+                        
+                            <!-- Boutons alignés et espacés -->
+                            <div class="d-flex align-items-center" style="gap: 0.4rem;">
+                                <!-- Edit -->
                                 <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary btn-xs" 
                                    title="@lang('locale.edit', ['param'=>''])">
                                     <i class="si si-pencil"></i>
                                 </a>
+                        
+                                <!-- Delete -->
                                 <form action="{{ route('dailies.destroy', $item->id) }}" method="POST" 
                                       onsubmit="return confirm('@lang('locale.confirm_delete')');" class="d-inline">
                                     @csrf
@@ -58,6 +61,19 @@
                                         <i class="si si-trash"></i>
                                     </button>
                                 </form>
+                        
+                                <!-- Copy Link -->
+                                <button type="button" class="btn btn-secondary btn-xs" 
+                                        onclick="navigator.clipboard.writeText('{{ route('dailies.show', $item->id) }}'); alert('@lang('locale.link_copied')');"
+                                        title="@lang('locale.copy_link')">
+                                    <i class="si si-link"></i>
+                                </button>
+                        
+                                <!-- Share Facebook -->
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('dailies.show', $item->id)) }}" 
+                                   target="_blank" class="btn btn-info btn-xs" title="@lang('locale.share_facebook')">
+                                    <i class="si si-social-facebook"></i>
+                                </a>
                             </div>
                         </div>
                     
