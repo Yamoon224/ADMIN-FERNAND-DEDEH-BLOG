@@ -47,7 +47,7 @@
                             <!-- Boutons alignés et espacés -->
                             <div class="d-flex align-items-center" style="gap: 0.4rem;">
                                 <!-- Edit -->
-                                <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary btn-xs" 
+                                <a href="{{ route('dailies.edit', $item->id) }}" class="btn btn-primary btn-sm" 
                                    title="@lang('locale.edit', ['param'=>''])">
                                     <i class="si si-pencil"></i>
                                 </a>
@@ -57,13 +57,13 @@
                                       onsubmit="return confirm('@lang('locale.confirm_delete')');" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-xs" title="@lang('locale.delete')">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="@lang('locale.delete')">
                                         <i class="si si-trash"></i>
                                     </button>
                                 </form>
                         
                                 <!-- Copy Link -->
-                                <button type="button" class="btn btn-secondary btn-xs" 
+                                <button type="button" class="btn btn-secondary btn-sm" 
                                         onclick="navigator.clipboard.writeText('{{ route('dailies.show', $item->id) }}'); alert('@lang('locale.link_copied')');"
                                         title="@lang('locale.copy_link')">
                                     <i class="si si-link"></i>
@@ -71,7 +71,7 @@
                         
                                 <!-- Share Facebook -->
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('dailies.show', $item->id)) }}" 
-                                   target="_blank" class="btn btn-info btn-xs" title="@lang('locale.share_facebook')">
+                                   target="_blank" class="btn btn-info btn-sm" title="@lang('locale.share_facebook')">
                                     <i class="si si-social-facebook"></i>
                                 </a>
                             </div>
