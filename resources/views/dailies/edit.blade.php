@@ -69,7 +69,7 @@
                                                 {{-- Hashtag --}}
                                                 <div class="col-lg-6">
                                                     <div class="mb-4">
-                                                        <label class="form-label" for="hashtag_id[{{ $index }}]">@lang('locale.hashtag') <span class="text-danger">*</span></label>
+                                                        <label class="form-label" for="hashtag_id[{{ $index }}]">@lang('locale.hashtag', ['suffix'=>'']) <span class="text-danger">*</span></label>
                                                         <select class="form-select" id="hashtag_id[{{ $index }}]" name="hashtag_id[{{ $index }}]" required>
                                                             @foreach ($hashtags as $item)
                                                                 <option value="{{ $item->id }}" {{ $item->id == $content->hashtag_id ? 'selected' : '' }}>
